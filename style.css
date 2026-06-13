@@ -776,6 +776,14 @@ button {
   color: var(--text-secondary);
 }
 
+.project-card__future-apps {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
 /* ============================================================
    CONTACT SECTION ("Let's talk.")
    ============================================================ */
@@ -1187,6 +1195,10 @@ button {
 
 .project-card__desc {
   transform: translateZ(30px);
+}
+
+.project-card__future-apps {
+  transform: translateZ(28px);
 }
 
 /* Project card glare overlay */
