@@ -1,0 +1,19 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.cproject
+.settings/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

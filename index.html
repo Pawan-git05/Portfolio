@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pawan Singh — AI Developer & Software Engineer</title>
+  <meta name="description" content="Pawan Singh is an AI Developer and Software Engineer building intelligent systems and modern web experiences. B.Tech CS student specializing in Machine Learning, Reinforcement Learning, and Full-Stack Development.">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pawan Singh — AI Developer & Software Engineer">
+  <meta property="og:description" content="Building intelligent systems and modern web experiences.">
+  <meta property="og:image" content="assets/profile.png">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pawan Singh — AI Developer & Software Engineer">
+  <meta name="twitter:description" content="Building intelligent systems and modern web experiences.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Archivo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=1.4">
+  
+  <!-- Three.js Library & GLTFLoader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       PREMIUM LOADING EXPERIENCE
+       ============================================================ -->
+  <div class="loader-overlay" id="loader-overlay">
+    <!-- Scrolling Marquees in background (subtle watermarks) -->
+    <div class="loader-marquee-container">
+      <div class="loader-marquee">
+        <span>AI Developer · Software Engineer · Problem Solver · Building Intelligent Systems · Creative Developer · Tech Explorer · Continuous Learning</span>
+        <span>AI Developer · Software Engineer · Problem Solver · Building Intelligent Systems · Creative Developer · Tech Explorer · Continuous Learning</span>
+      </div>
+      <div class="loader-marquee loader-marquee--reverse">
+        <span>Innovation Through Code · Generative AI · Reinforcement Learning · Full Stack Development · Open Source Contributor · AI Enthusiast</span>
+        <span>Innovation Through Code · Generative AI · Reinforcement Learning · Full Stack Development · Open Source Contributor · AI Enthusiast</span>
+      </div>
+      <div class="loader-marquee">
+        <span>Building Scalable Applications · DSA · Machine Learning · Neural Networks · Deep Learning · Python · React · Node.js</span>
+        <span>Building Scalable Applications · DSA · Machine Learning · Neural Networks · Deep Learning · Python · React · Node.js</span>
+      </div>
+    </div>
+    
+    <!-- Elegant Center Counter -->
+    <div class="loader-content">
+      <div class="loader-counter" id="loader-counter">0%</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAVBAR (Floating, Fixed)
+       ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <span class="navbar__name">Pawan Singh</span>
+    <button class="navbar__menu-btn" id="menu-toggle" aria-label="Toggle navigation menu">
+      <span class="navbar__dots">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </nav>
+
+  <!-- Nav Dropdown -->
+  <div class="nav-dropdown" id="nav-dropdown">
+    <ul class="nav-dropdown__list">
+      <li><a href="#hero" class="nav-dropdown__link">Home</a></li>
+      <li><a href="#about" class="nav-dropdown__link">About Me</a></li>
+      <li><a href="#skills" class="nav-dropdown__link">Skills</a></li>
+      <li><a href="#projects" class="nav-dropdown__link">Projects</a></li>
+      <li><a href="#contact" class="nav-dropdown__link">Contact</a></li>
+    </ul>
+    <div class="nav-dropdown__divider"></div>
+    <button class="nav-dropdown__cta" id="nav-resume-btn">View Resume</button>
+  </div>
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <div class="hero__title-wrap">
+        <div class="hero__container">
+          <!-- Beveled Corner Brackets -->
+          <div class="hero__bracket hero__bracket--left">
+            <svg viewBox="0 0 60 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M60 10 H24 L10 24 V176 L24 190 H60" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+          <div class="hero__bracket hero__bracket--right">
+            <svg viewBox="0 0 60 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10 H36 L50 24 V176 L36 190 H0" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+            </svg>
+          </div>
+
+          <!-- Small top metadata label -->
+          <div class="hero__meta-top">
+            <span class="hero__meta-item">Pawan Singh</span>
+            <span class="hero__meta-dot">·</span>
+            <span class="hero__meta-item">Software Engineer</span>
+          </div>
+
+          <!-- Main Title (Typewriter structure) -->
+          <h1 class="hero__title">
+            <span class="hero__title-line">I AM A</span>
+            <span class="hero__title-line"><span id="hero-typewriter"></span><span class="typewriter-cursor">|</span></span>
+          </h1>
+          
+          <!-- Sub-tagline underneath main title -->
+          <div class="hero__meta-sub">
+            <span>Building Intelligent Digital Experiences</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="hero__bottom">
+      <span class="hero__copyright">©2026</span>
+      <span class="hero__since">/Building since 2023</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT SECTION ("Hey!")
+       ============================================================ -->
+  <section class="about" id="about">
+    <div class="about__inner">
+      
+      <!-- Left Column -->
+      <div class="about__left reveal">
+        <h2 class="about__heading">Hey!</h2>
+        <p class="about__intro">
+          I'm Pawan, a builder based in Dehradun, India, currently pursuing B.Tech in Computer Science at Graphic Era Hill University.
+        </p>
+      </div>
+
+      <!-- Center — Blank Avatar Placeholder -->
+      <div class="about__center reveal reveal-delay-1" id="about-avatar-wrap">
+        <div class="about__photo">
+          <div class="avatar-canvas-container" id="about-3d-avatar" style="width: 100%; height: 100%;"></div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="about__right reveal reveal-delay-2">
+        <p class="about__bio">
+          I'm an AI Developer and Software Engineer with a strong focus on building intelligent, scalable, and performance-driven systems.
+        </p>
+        <p class="about__bio">
+          From reinforcement learning agents to blockchain-powered donation networks, I build applications that solve real-world problems — combining machine learning, modern web stacks, and clean engineering.
+        </p>
+        <button class="about__cta" id="about-resume-btn">
+          View Resume
+          <span class="about__cta-arrow">↗</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOCUS TEXT
+       ============================================================ -->
+  <section class="focus">
+    <p class="focus__text reveal">
+      I focus on applications that are <span class="highlight">built to move fast</span>, stay simple, and perform in real-world use, driven by clarity, structured systems, and <span class="highlight">intelligent design</span>.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       SKILLS SECTION
+       ============================================================ -->
+  <section class="skills" id="skills">
+    <div class="skills__inner">
+      <h2 class="skills__heading reveal">Skills</h2>
+      
+      <div class="skills__list">
+        <div class="skill-item reveal">
+          <span class="skill-item__name">AI & Machine Learning</span>
+          <span class="skill-item__tags">Machine Learning · Reinforcement Learning · Q-Learning · GenAI · LLMs · Prompt Engineering</span>
+        </div>
+        <div class="skill-item reveal reveal-delay-1">
+          <span class="skill-item__name">Backend Development</span>
+          <span class="skill-item__tags">Python · Node.js · Flask · PostgreSQL · REST APIs · Firebase</span>
+        </div>
+        <div class="skill-item reveal reveal-delay-2">
+          <span class="skill-item__name">Frontend Development</span>
+          <span class="skill-item__tags">React 18 · JavaScript · Vite · HTML/CSS · Responsive Design</span>
+        </div>
+        <div class="skill-item reveal reveal-delay-3">
+          <span class="skill-item__name">Computer Science</span>
+          <span class="skill-item__tags">DSA (200+ Problems) · OOP · DBMS · OS · Computer Networks · C++</span>
+        </div>
+        <div class="skill-item reveal reveal-delay-4">
+          <span class="skill-item__name">Tools & Platforms</span>
+          <span class="skill-item__tags">Git · GitHub · Postman · VS Code · Polygon Blockchain · Twilio · AWS · Oracle OCI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS SECTION
+       ============================================================ -->
+  <section class="projects" id="projects">
+    <div class="projects__inner">
+      <div class="projects__header reveal">
+        <h2 class="projects__heading">Featured<br>Projects</h2>
+        <a href="https://github.com/Pawan-git05" target="_blank" rel="noopener" class="projects__view-all">
+          View All Work <span>→</span>
+        </a>
+      </div>
+
+      <div class="projects__grid">
+        
+        <!-- Project Card — DonorChain -->
+        <a href="https://github.com/Pawan-git05/Donarchain" target="_blank" rel="noopener" class="project-card reveal">
+          <div class="project-card__image-wrap">
+            <img src="assets/project-donorchain.png" alt="DonorChain — Real-Time Emergency Donation Network" class="project-card__image">
+          </div>
+          <h3 class="project-card__name">DonorChain</h3>
+          <p class="project-card__desc">Real-Time Emergency Donation Network · React · Node.js · PostgreSQL · Blockchain</p>
+        </a>
+
+        <!-- Project Card — PathForge AI -->
+        <a href="https://github.com/Pawan-git05/Pathforge_AI" target="_blank" rel="noopener" class="project-card reveal reveal-delay-1">
+          <div class="project-card__image-wrap">
+            <img src="assets/project-pathforge.png" alt="PathForge AI — Intelligent Route Optimization System" class="project-card__image">
+          </div>
+          <h3 class="project-card__name">PathForge AI</h3>
+          <p class="project-card__desc">Intelligent Route Optimization · Python · Flask · Reinforcement Learning · Q-Learning</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT SECTION ("Let's talk.")
+       ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="contact__inner">
+      
+      <!-- Left -->
+      <div class="contact__left reveal">
+        <h2 class="contact__heading">Let's talk.</h2>
+        <p class="contact__sub">Have a project or want to collaborate? Fill out the form, and I'll get back to you soon.</p>
+        
+        <div class="contact__socials">
+          <!-- GitHub -->
+          <a href="https://github.com/Pawan-git05" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:contact@pawansingh.dev" class="social-icon" aria-label="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right — Form -->
+      <form class="contact__form reveal reveal-delay-1" id="contact-form">
+        <div class="form-group">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Your Project</label>
+          <textarea id="contact-message" placeholder="Tell me about your project" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER (Dark)
+       ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer__inner">
+      
+      <!-- Tagline -->
+      <div class="footer__tagline">
+        Building<br>Intelligent<br>Systems.
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer__links-group">
+        <h4>/Quick Links</h4>
+        <a href="#hero">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer__contact-group">
+        <h4>/Contact</h4>
+        <a href="mailto:contact@pawansingh.dev">contact@pawansingh.dev</a>
+      </div>
+    </div>
+
+    <!-- Watermark -->
+    <div class="footer__watermark" aria-hidden="true">PAWAN.</div>
+  </footer>
+
+  <!-- ============================================================
+       RESUME MODAL
+       ============================================================ -->
+  <div class="resume-overlay" id="resume-overlay">
+    <div class="resume-modal">
+      
+      <div class="resume-modal__header">
+        <h3 class="resume-modal__title">Resume</h3>
+        <button class="resume-modal__close" id="resume-close" aria-label="Close resume">✕</button>
+      </div>
+
+      <div class="resume-modal__body">
+        <div class="resume-content">
+          
+          <div class="resume-name">Pawan Singh</div>
+          <div class="resume-subtitle">B.Tech CS, GEHU &nbsp;|&nbsp; 2027 Batch</div>
+
+          <!-- Education -->
+          <h2>Education</h2>
+          <div class="resume-row">
+            <h3>B.Tech — Computer Science & Engineering</h3>
+            <span class="resume-date">2023 – 2027</span>
+          </div>
+          <div class="resume-sub">Graphic Era Hill University (GEHU), Dehradun — CGPA: 7.52</div>
+          <div class="resume-sub" style="margin-bottom: 12px;">Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming, DBMS, OS, Computer Networks, Software Engineering</div>
+
+          <div class="resume-row">
+            <h3>Class XII</h3>
+            <span class="resume-date">2022 – 2023</span>
+          </div>
+          <div class="resume-sub">84%</div>
+
+          <!-- Technical Skills -->
+          <h2>Technical Skills</h2>
+          <div class="resume-sub"><strong>Programming:</strong> Python, C++, JavaScript, SQL</div>
+          <div class="resume-sub"><strong>AI/ML:</strong> Machine Learning, Reinforcement Learning, Model Evaluation, Prompt Engineering, Generative AI, LLM Applications</div>
+          <div class="resume-sub"><strong>Libraries:</strong> NumPy, Pandas, Matplotlib, Scikit-learn</div>
+          <div class="resume-sub"><strong>CS:</strong> DSA, OOP, DBMS, OS, Computer Networks</div>
+          <div class="resume-sub"><strong>Tools:</strong> Git, GitHub, Postman, VS Code</div>
+
+          <!-- Projects -->
+          <h2>Projects</h2>
+          
+          <h3>DonorChain — Real-Time Emergency Donation Network</h3>
+          <div class="resume-tags">React 18 · Vite(PWA) · Node.js · PostgreSQL (PostGIS) · Polygon · Twilio · Firebase Cloud Messaging</div>
+          <ul>
+            <li>Designed an intelligent donor ranking engine in Python that scores candidates using blood-type compatibility, real-time availability, and geographic proximity via PostGIS spatial indexing; reduced average match latency to under 30 seconds across 100+ test records.</li>
+            <li>Built a severity-based urgency classification layer that reorders the matching queue in real time based on request criticality; anchored donor consent and identity verification hashes to the Polygon blockchain, ensuring tamper-resistant audit records.</li>
+            <li>Delivered real-time donor alerts via Twilio SMS and Firebase Cloud Messaging within 3-5 seconds of a match event.</li>
+          </ul>
+
+          <h3>PathForge AI — Intelligent Route Optimization System</h3>
+          <div class="resume-tags">Python · Flask · Reinforcement Learning · Q-Learning · A* · Dijkstra</div>
+          <ul>
+            <li>Trained a Q-Learning agent in Python to navigate grid environments with obstacles; cut average route exploration steps by ~18% versus random-walk baseline across 500+ simulated scenarios.</li>
+            <li>Fused Q-Learning policy updates with A* heuristic guidance to enable dynamic path selection in changing environments; the hybrid approach converged to near-optimal routes ~13% faster than baseline.</li>
+            <li>Wrapped the trained agent in a Flask REST API with real-time path visualization; reward shaping generalizes toward warehouse robotics and autonomous last-mile delivery.</li>
+          </ul>
+
+          <!-- Achievements -->
+          <h2>Achievements & Activities</h2>
+          <ul>
+            <li>Oracle OCI 2025 Certified AI Foundations Associate</li>
+            <li>AWS ML Fundamentals & Generative AI Solutions — 2025</li>
+            <li>Built AI-powered applications using Python, Reinforcement Learning, REST APIs, and LLM-based personalization systems</li>
+            <li>Solved 200+ DSA problems on LeetCode and HackerRank</li>
+            <li>Led a 4-member team to 100% on-time delivery of OS, DBMS projects</li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="resume-modal__footer">
+        <a href="Pawan_Singh_ResumeA.docx" download class="resume-modal__btn resume-modal__btn--primary">Download Resume ↓</a>
+        <button class="resume-modal__btn resume-modal__btn--secondary" id="resume-close-2">Close</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
+
+  <!-- JavaScript -->
+  <script src="script.js?v=1.5"></script>
+
+</body>
+</html>
