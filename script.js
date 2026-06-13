@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('contact-email').value;
     const message = document.getElementById('contact-message').value;
 
-    const mailtoLink = `mailto:contact@pawansingh.dev?subject=Project Inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${message}`)}`;
+    const mailtoLink = `mailto:pawan.cse2027@gmail.com?subject=Project Inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${message}`)}`;
     window.location.href = mailtoLink;
 
     const submitBtn = contactForm.querySelector('.form-submit');
