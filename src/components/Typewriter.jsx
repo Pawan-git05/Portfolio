@@ -3,37 +3,42 @@ import React, { useState, useEffect } from 'react';
 export default function Typewriter() {
   const roles = ["AI Enthusiast", "CS Student"];
   const [roleIndex, setRoleIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
   const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let typeSpeed = isDeleting ? 40 : 80;
     const currentRole = roles[roleIndex];
+    let timer;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        setDisplayText(currentRole.substring(0, charIndex + 1));
-        setCharIndex(prev => prev + 1);
+    if (isDeleting) {
+      // Deleting speed (slower)
+      timer = setTimeout(() => {
+        setDisplayText(currentRole.substring(0, displayText.length - 1));
+      }, 70);
+    } else {
+      // Typing speed (slower)
+      timer = setTimeout(() => {
+        setDisplayText(currentRole.substring(0, displayText.length + 1));
+      }, 145);
+    }
 
-        if (charIndex + 1 === currentRole.length) {
-          typeSpeed = 2000;
-          setIsDeleting(true);
-        }
-      } else {
-        setDisplayText(currentRole.substring(0, charIndex - 1));
-        setCharIndex(prev => prev - 1);
-
-        if (charIndex - 1 === 0) {
-          setIsDeleting(false);
-          setRoleIndex(prev => (prev + 1) % roles.length);
-          typeSpeed = 400;
-        }
-      }
-    }, typeSpeed);
+    // State transitions & pauses
+    if (!isDeleting && displayText === currentRole) {
+      // Pause at full text
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2000);
+    } else if (isDeleting && displayText === '') {
+      // Pause after fully deleted
+      clearTimeout(timer);
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+      timer = setTimeout(() => {}, 1000);
+    }
 
     return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, roleIndex]);
+  }, [displayText, isDeleting, roleIndex]);
 
   return (
     <span className="hero__title-line">

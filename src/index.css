@@ -258,7 +258,7 @@ button {
   font-family: var(--font-display);
   font-weight: 850;
   font-size: clamp(55px, 9.5vw, 150px);
-  line-height: 1.05;
+  line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--text-primary);
   text-transform: uppercase;
@@ -1847,3 +1847,76 @@ button {
     margin-top: 10px;
   }
 }
+
+/* ============================================================
+   PROJECT CARD ACTIONS (LIGHT THEME)
+   ============================================================ */
+.project-card__details-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--accent) !important;
+  background: rgba(235, 77, 109, 0.06);
+  border: 1.5px solid rgba(235, 77, 109, 0.2);
+  margin-top: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s var(--ease-smooth);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(235, 77, 109, 0.03);
+}
+
+.project-card__details-btn:hover {
+  background: rgba(235, 77, 109, 0.12);
+  border-color: rgba(235, 77, 109, 0.4);
+  box-shadow: 0 4px 20px rgba(235, 77, 109, 0.15);
+  transform: translateY(-1px);
+}
+
+.tech-chip {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: rgba(17, 17, 17, 0.65) !important;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.tech-chip:hover {
+  background: rgba(0, 0, 0, 0.07) !important;
+  color: rgba(17, 17, 17, 0.85) !important;
+}
+
+.card-btn--github {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-primary) !important;
+  background: rgba(17, 17, 17, 0.05) !important;
+  border: 1px solid rgba(17, 17, 17, 0.12) !important;
+  transition: all 0.3s var(--ease-smooth);
+  width: 100%;
+}
+
+.card-btn--github:hover {
+  background: rgba(17, 17, 17, 0.1) !important;
+  border-color: rgba(17, 17, 17, 0.2) !important;
+  transform: translateY(-1px);
+}
+

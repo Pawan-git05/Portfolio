@@ -45,6 +45,11 @@ export default function ProjectCard({ project, revealDelayClass }) {
           loading="lazy"
         />
       </div>
+
+      {/* View Details Button just below the image, highlighted in pink */}
+      <Link to={`/projects/${project.id}`} className="project-card__details-btn">
+        View Project Details
+      </Link>
       
       <h3 className="project-card__name">{project.title}</h3>
       <p className="project-card__desc" style={{ marginBottom: '16px' }}>{project.tagline}</p>
@@ -52,67 +57,23 @@ export default function ProjectCard({ project, revealDelayClass }) {
       {/* Tech Stack Chips */}
       <div className="project-card__chips" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '20px' }}>
         {project.techStack.map(tech => (
-          <span key={tech} className="tech-chip" style={{
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            padding: '4px 10px',
-            borderRadius: '20px',
-            fontSize: '0.75rem',
-            color: 'rgba(255,255,255,0.7)',
-            fontFamily: 'var(--font-heading)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px'
-          }}>
+          <span key={tech} className="tech-chip">
             {tech}
           </span>
         ))}
       </div>
 
-      {/* Buttons */}
-      <div className="project-card__buttons" style={{ display: 'flex', gap: '12px', marginTop: 'auto' }}>
+      {/* GitHub Button at the bottom */}
+      <div className="project-card__buttons" style={{ display: 'flex', marginTop: 'auto' }}>
         <a 
           href={project.githubLink} 
           target="_blank" 
           rel="noopener noreferrer" 
           className="card-btn card-btn--github"
           onClick={(e) => e.stopPropagation()}
-          style={{
-            flex: 1,
-            textAlign: 'center',
-            padding: '10px 14px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.85rem',
-            fontFamily: 'var(--font-heading)',
-            fontWeight: '600',
-            textDecoration: 'none',
-            color: '#fff',
-            background: 'rgba(255,255,255,0.08)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            transition: 'all 0.3s ease'
-          }}
         >
-          GitHub
+          GitHub Repository
         </a>
-        <Link 
-          to={`/projects/${project.id}`} 
-          className="card-btn card-btn--details"
-          style={{
-            flex: 1,
-            textAlign: 'center',
-            padding: '10px 14px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.85rem',
-            fontFamily: 'var(--font-heading)',
-            fontWeight: '600',
-            textDecoration: 'none',
-            color: '#000',
-            background: '#fff',
-            border: '1px solid #fff',
-            transition: 'all 0.3s ease'
-          }}
-        >
-          View Details
-        </Link>
       </div>
       
       <div className="project-card-glare"></div>
