@@ -6,36 +6,35 @@ export const personalInfo = {
   name: "Pawan Singh",
   firstName: "PAWAN",
   lastName: "SINGH",
-  title: "AI Developer & Systems Engineer",
+  title: "Software Engineer & AI Developer",
   roles: [
-    "AI Developer",
-    "Machine Learning Engineer",
-    "Full-Stack Systems Architect",
+    "Full-Stack Developer",
+    "AI & ML Developer",
     "DSA Specialist & Problem Solver",
-    "Creative Technologist"
+    "Systems & Compiler Builder"
   ],
-  bio: "An AI developer and full-stack systems engineer specializing in building intelligent systems, reinforcement learning runtimes, and high-performance web experiences. Backed by 1200+ solved algorithmic challenges and production-ready distributed architectures.",
+  bio: "Computer Science undergraduate at Graphic Era Hill University (GEHU, 2027) with deep passion for building full-stack platforms, compiler architectures, and AI/ML solutions. Proven problem-solver with 200+ solved algorithmic challenges.",
   availability: "Open to Internships & Engineering Roles",
-  location: "Delhi NCR, India",
+  location: "Dehradun / Delhi NCR, India",
   timezone: "IST (UTC +5:30)",
-  email: "pawansingh.dev@gmail.com",
+  email: "Singhbisht310@gmail.com",
+  phone: "+91 8445606822",
   socials: {
     github: "https://github.com/Pawan-git05",
-    linkedin: "https://linkedin.com/in/pawan-singh-dev",
-    twitter: "https://twitter.com/pawansingh_dev",
-    email: "mailto:pawansingh.dev@gmail.com",
-    resume: "/Pawan_Singh_ResumeA.docx"
+    linkedin: "https://www.linkedin.com/in/pawan-singh-a46876280/",
+    email: "mailto:Singhbisht310@gmail.com",
+    resume: "/Pawan_Resume.pdf"
   }
 };
 
 // 6 High-Impact Telemetry Stats
 export const telemetryStats = [
-  { label: "Problems Solved", value: 1200, suffix: "+", icon: "Brain", color: "#A855F7" },
-  { label: "Projects Built", value: 18, suffix: "+", icon: "Rocket", color: "#FB923C" },
-  { label: "Certifications", value: 10, suffix: "", icon: "Trophy", color: "#A855F7" },
-  { label: "Hackathons Won", value: 6, suffix: "+", icon: "Zap", color: "#FB923C" },
-  { label: "GitHub Stars", value: 120, suffix: "+", icon: "Star", color: "#A855F7" },
-  { label: "Contributions", value: 1200, suffix: "+", icon: "Activity", color: "#FB923C" }
+  { label: "DSA Solved", value: 200, suffix: "+", icon: "Brain", color: "#A855F7" },
+  { label: "Class XII", value: 84, suffix: "%", icon: "Trophy", color: "#FB923C" },
+  { label: "GEHU CGPA", value: 7.6, suffix: "", icon: "Star", color: "#A855F7" },
+  { label: "Certifications", value: 4, suffix: "+", icon: "Rocket", color: "#FB923C" },
+  { label: "Core Projects", value: 3, suffix: "+", icon: "Zap", color: "#A855F7" },
+  { label: "Team Velocity", value: 100, suffix: "%", icon: "Activity", color: "#FB923C" }
 ];
 
 // 4 Core Architecture Domain Cards
@@ -114,120 +113,84 @@ export const skillsData = {
   ]
 };
 
-// Projects & Case Studies
+// Projects & Case Studies (From Resume & Live GitHub)
 export const projectsData = [
   {
     id: 1,
-    title: "NeuroVision AI",
-    subtitle: "Real-Time Multi-Modal Computer Vision & Intelligence Engine",
-    description: "A high-performance neural vision pipeline that processes multi-stream camera feeds, executes object classification, and runs edge inference with ultra-low latency.",
-    longDescription: "NeuroVision AI is an end-to-end computer vision platform designed for real-time video telemetry, gesture recognition, and anomaly detection. Engineered using PyTorch and FastAPI with hardware-accelerated batching, it achieves sub-100ms end-to-end inference.",
-    tech: ["PyTorch", "FastAPI", "React", "OpenCV", "Docker", "Redis", "Tailwind CSS"],
-    github: "https://github.com/Pawan-git05/Portfolio",
-    demo: "https://portfolio-six-theta-62b23sl6uq.vercel.app/",
+    title: "CloudLearn",
+    subtitle: "Full-Stack Learning & Coding Practice Platform (Ongoing)",
+    description: "Full-stack learning platform with role-based dashboards, coding practice, and LLM-assisted DSA problem generation using TypeScript, Prisma ORM, and PostgreSQL.",
+    longDescription: "Built a full-stack learning platform with role-based dashboards, coding practice, and LLM-assisted DSA problem generation using TypeScript, Prisma ORM, and PostgreSQL. Designed scalable REST APIs and optimized PostgreSQL queries for personalized recommendations and efficient submission analytics.",
+    tech: ["TypeScript", "Next.js", "Prisma ORM", "PostgreSQL", "Tailwind CSS", "Framer Motion", "Three.js"],
+    github: "https://github.com/Pawan-git05/CloudLearn",
+    demo: "https://github.com/Pawan-git05/CloudLearn",
     featured: true,
     color: "#A855F7",
-    category: "AI / Machine Learning",
+    category: "Full Stack / AI",
     stats: {
-      inferences: "50K+",
-      latency: "< 85ms",
-      accuracy: "98.4%"
+      queries: "Optimized",
+      architecture: "Prisma+Postgres",
+      features: "LLM Assisted"
     },
-    problem: "Real-time edge video processing suffers from bottlenecked inference queues and GPU memory fragmentation under multi-stream workloads.",
-    solution: "Engineered an asynchronous processing pipeline utilizing FastAPI background workers, tensor batching, and Redis pub/sub streams to achieve real-time throughput.",
+    problem: "Traditional coding platforms lack personalized DSA problem generation and integrated role-based dashboards with real-time analytics.",
+    solution: "Designed scalable REST APIs, role-based access control, and integrated LLM workflows for dynamic problem generation and submission evaluation.",
     challenges: [
-      "Mitigating GPU memory fragmentation during continuous streaming",
-      "Dynamic frame skipping algorithm for network bandwidth fluctuations",
-      "WebSocket connection pool load balancing across cluster nodes"
+      "Optimizing complex PostgreSQL queries for personalized recommendation metrics",
+      "Dynamic Three.js & Framer Motion interactive UI performance",
+      "Prisma schema relational modeling across submissions and user roles"
     ],
     learnings: [
-      "PyTorch TorchScript JIT compilation for production deployment",
-      "Zero-copy frame decoding with OpenCV and shared memory",
-      "Asynchronous backpressure management in distributed stream ingestion"
+      "Advanced Prisma schema migrations and relation queries",
+      "Next.js App Router performance tuning and server actions",
+      "Full-stack state management with TypeScript end-to-end typing"
     ],
-    mockFileName: "inference_engine.py",
+    mockFileName: "problem_generator.ts",
     mockCodeLines: [
-      "@app.websocket('/ws/stream/{stream_id}')",
-      "async def stream_inference(websocket: WebSocket, stream_id: str):",
-      "    tensor_batch = await frame_buffer.dequeue_batch(max_size=32)",
-      "    predictions = torch_jit_model(tensor_batch.to(device))",
-      "    await websocket.send_json({'detections': predictions.tolist()})"
+      "export async function generateDSAProblem(topic: string, difficulty: Difficulty) {",
+      "  const prompt = buildStructuredPrompt(topic, difficulty);",
+      "  const problem = await llmClient.generateStructuredJSON(prompt);",
+      "  return await prisma.dSAProblem.create({ data: { ...problem } });",
+      "}"
     ]
   },
   {
     id: 2,
-    title: "CodePrepX Sandbox",
-    subtitle: "Isolated Sandbox Compilation Engine & Evaluation Runtime",
-    description: "A secure online code execution engine hosting isolated micro-containers to evaluate multi-language submissions with security containment and real-time socket streaming.",
-    tech: ["Node.js", "Docker SDK", "React", "Redis", "BullMQ", "PostgreSQL"],
-    github: "https://github.com/Pawan-git05/Portfolio",
-    demo: "https://portfolio-six-theta-62b23sl6uq.vercel.app/",
+    title: "DonorChain",
+    subtitle: "Real-Time Emergency Donation & Spatial Indexing Network",
+    description: "Emergency donation platform using PostGIS spatial indexing for efficient donor matching and nearby pharmacy discovery with Polygon-based verification.",
+    tech: ["React", "Node.js", "PostgreSQL", "PostGIS", "Polygon", "Twilio", "Firebase"],
+    github: "https://github.com/Pawan-git05/Donarchain",
+    demo: "https://github.com/Pawan-git05/Donarchain",
     featured: false,
     color: "#0EA5E9",
-    category: "Systems / Full Stack",
-    mockFileName: "sandbox_runner.js",
+    category: "Full Stack / Web3",
+    mockFileName: "spatial_matcher.js",
     mockCodeLines: [
-      "const container = await docker.createContainer({",
-      "  Image: 'sandbox-runtime:latest',",
-      "  HostConfig: { Memory: 256 * 1024 * 1024, CpuQuota: 50000 },",
-      "  Cmd: ['python3', 'user_submission.py']",
-      "});"
+      "const donors = await db.query(`",
+      "  SELECT id, ST_Distance(geom, ST_MakePoint($1, $2)::geography) AS distance",
+      "  FROM donor_locations WHERE ST_DWithin(geom, ST_MakePoint($1, $2)::geography, 10000)",
+      "  ORDER BY distance ASC LIMIT 10;`, [longitude, latitude]);"
     ]
   },
   {
     id: 3,
-    title: "CSV Query Compiler",
-    subtitle: "SQL-to-Python Query Compilation & AST Translation Pipeline",
-    description: "A SQL-like compiler that translates structured queries over CSV datasets into optimized executable Python code with semantic validation and an interactive IDE.",
-    tech: ["Python", "AST Parser", "TypeScript", "React", "Tailwind CSS"],
-    github: "https://github.com/Pawan-git05/Portfolio",
-    demo: "https://portfolio-six-theta-62b23sl6uq.vercel.app/",
+    title: "CSV Query Compiler (CQL)",
+    subtitle: "Recursive Descent Parsing & Abstract Syntax Tree (AST) Compiler",
+    description: "A SQL-like compiler that translates structured queries on CSV datasets into executable Python code through lexical analysis, parsing, semantic validation, and code generation.",
+    tech: ["Python", "Recursive Descent Parsing", "CSV", "Dataclasses", "AST"],
+    github: "https://github.com/Pawan-git05/CQL",
+    demo: "https://github.com/Pawan-git05/CQL",
     featured: false,
     color: "#10B981",
     category: "Compiler Design",
     mockFileName: "compiler_ast.py",
     mockCodeLines: [
-      "def compile_sql_to_python(query: str) -> str:",
-      "    tokens = tokenize(query)",
-      "    ast_node = parse_expression(tokens)",
-      "    return generate_python_bytecode(ast_node)"
+      "class SQLCompiler(ASTVisitor):",
+      "    def visit_SelectNode(self, node: SelectNode) -> str:",
+      "        filtered = self.visit(node.where_clause)",
+      "        grouped = self.visit(node.group_by) if node.group_by else filtered",
+      "        return self.codegen.generate_executor(grouped, node.projections)"
     ]
-  },
-  {
-    id: 4,
-    title: "AlgoViz Pro",
-    subtitle: "Interactive Data Structures & Algorithm Visualizer",
-    description: "An interactive visualization engine animating graph traversals, dynamic programming matrices, and sorting algorithms with step-by-step state space breakdown.",
-    tech: ["React", "TypeScript", "D3.js", "Canvas API", "Tailwind CSS"],
-    github: "https://github.com/Pawan-git05/Portfolio",
-    demo: "https://portfolio-six-theta-62b23sl6uq.vercel.app/",
-    featured: false,
-    color: "#FB923C",
-    category: "Frontend"
-  },
-  {
-    id: 5,
-    title: "EduStream Cloud",
-    subtitle: "Distributed Video Streaming & LMS Platform",
-    description: "A scalable educational platform with video transcoding, real-time code evaluation, quiz checkpoints, and certificate generation for modern learners.",
-    tech: ["React", "Node.js", "MongoDB", "AWS S3", "FFmpeg", "Redis"],
-    github: "https://github.com/Pawan-git05/Portfolio",
-    demo: "https://portfolio-six-theta-62b23sl6uq.vercel.app/",
-    featured: false,
-    color: "#A855F7",
-    category: "Full Stack"
-  },
-  {
-    id: 6,
-    title: "WeatherAI Forecast",
-    subtitle: "AI-Powered Climate Intelligence Dashboard",
-    description: "Smart meteorological dashboard integrating machine learning weather prediction models, interactive radar overlays, and historical anomaly analysis.",
-    tech: ["React", "Python", "FastAPI", "OpenAI API", "Leaflet.js"],
-    github: "https://github.com/Pawan-git05/Portfolio",
-    demo: "https://portfolio-six-theta-62b23sl6uq.vercel.app/",
-    featured: false,
-    color: "#FB923C",
-    category: "AI / Machine Learning"
   }
 ];
 
@@ -237,51 +200,31 @@ export const codingProfiles = [
     platform: "LeetCode",
     username: "pawan_singh",
     url: "https://leetcode.com",
-    stats: { solved: 540, easy: 210, medium: 260, hard: 70, rating: 1720 },
+    stats: { solved: "200+", focus: "DSA & Problem Solving", rating: "Active" },
     color: "#FFA116",
     bgColor: "rgba(255, 161, 22, 0.08)",
     borderColor: "rgba(255, 161, 22, 0.25)",
-    description: "Consistent problem solver with focus on graphs, dynamic programming, and systems algorithms"
+    description: "Solved 200+ DSA algorithmic challenges focusing on Arrays, Trees, Graphs, and DP"
   },
   {
     platform: "GitHub",
     username: "Pawan-git05",
     url: "https://github.com/Pawan-git05",
-    stats: { stars: 120, contributions: "1,200+", repos: 25 },
+    stats: { repos: "Active", branch: "main", stars: "Rising" },
     color: "#FFFFFF",
     bgColor: "rgba(255, 255, 255, 0.05)",
     borderColor: "rgba(255, 255, 255, 0.15)",
-    description: "Active open-source contributor, building AI pipelines, compilers, and web tools"
+    description: "Full-stack web projects, AST compiler architectures, and spatial networking codebases"
   },
   {
-    platform: "GeeksforGeeks",
-    username: "pawan_dev",
-    url: "https://geeksforgeeks.org",
-    stats: { solved: 380, score: 1420, rank: "Institute Rank 3", streak: 65 },
-    color: "#2F8D46",
-    bgColor: "rgba(47, 141, 70, 0.08)",
-    borderColor: "rgba(47, 141, 70, 0.25)",
-    description: "Top rank in college coding chapter with daily problem-solving consistency"
-  },
-  {
-    platform: "CodeChef",
-    username: "pawan_05",
-    url: "https://codechef.com",
-    stats: { solved: 220, rating: 1650, stars: 3, globalRank: "12K" },
-    color: "#9F7AEA",
-    bgColor: "rgba(159, 122, 234, 0.08)",
-    borderColor: "rgba(159, 122, 234, 0.25)",
-    description: "3-star rated algorithmic competitive programmer in Division 2 contests"
-  },
-  {
-    platform: "Coding Ninjas",
-    username: "pawan_singh",
-    url: "https://naukri.com/code360",
-    stats: { solved: 310, rating: 2200, rank: "Expert", streak: 80 },
-    color: "#E65C00",
-    bgColor: "rgba(230, 92, 0, 0.08)",
-    borderColor: "rgba(230, 92, 0, 0.25)",
-    description: "Expert level candidate with deep mastery of tree algorithms and recursion"
+    platform: "LinkedIn",
+    username: "pawan-singh-a46876280",
+    url: "https://www.linkedin.com/in/pawan-singh-a46876280/",
+    stats: { network: "Tech Community", connections: "Active", status: "Open to Roles" },
+    color: "#0A66C2",
+    bgColor: "rgba(10, 102, 194, 0.08)",
+    borderColor: "rgba(10, 102, 194, 0.25)",
+    description: "Professional updates, software engineering projects, and certifications"
   }
 ];
 
@@ -289,67 +232,65 @@ export const codingProfiles = [
 export const educationData = [
   {
     degree: "B.Tech in Computer Science & Engineering",
-    institution: "Your University / Institute Name",
-    year: "2022 — 2026",
-    current: "3rd Year (6th Semester)",
-    cgpa: "8.6 / 10.0",
+    institution: "Graphic Era Hill University (GEHU), Dehradun",
+    year: "2023 — 2027",
+    current: "2027 Batch",
+    cgpa: "7.6 / 10.0",
     courses: [
       "Data Structures & Algorithms",
-      "Artificial Intelligence & Machine Learning",
-      "Operating Systems",
+      "Object-Oriented Programming",
       "Database Management Systems",
+      "Operating Systems",
       "Computer Networks",
-      "Compiler Design",
-      "Cloud Computing",
-      "Object-Oriented Design"
+      "Software Engineering"
     ],
     highlights: [
-      "Core Technical Lead at Computer Science Society",
-      "Organized university-level Hackathons with 500+ participants",
-      "Winner of 3 inter-college AI & Coding Competitions"
+      "Led a 4-member team to 100% on-time delivery of OS, DBMS, and AI course projects",
+      "Introduced structured code-review workflows reducing rework cycles by 20%",
+      "Specializing in modern full-stack engineering and cloud-native systems"
     ]
   },
   {
     degree: "Higher Secondary Education (Class XII)",
     institution: "Senior Secondary School",
-    year: "2020 — 2022",
-    score: "93.4%",
-    stream: "Science (Physics, Chemistry, Mathematics & Computer Science)"
+    year: "2022 — 2023",
+    score: "84%",
+    stream: "Science"
   }
 ];
 
-// Achievements & Milestones
+// Achievements & Milestones (Directly from Resume)
 export const achievementsData = [
   {
-    title: "1st Place — National AI Innovation Hackathon",
-    category: "Hackathon Championship",
-    date: "2024",
-    description: "Built an autonomous multi-modal edge diagnostic platform utilizing lightweight neural networks, winning top honor among 120+ teams.",
-    badge: "🏆 1st Prize",
+    title: "Oracle OCI 2025 Certified AI Foundations Associate",
+    category: "Professional Certification",
+    date: "2025",
+    description: "Demonstrated foundation competence in AI, machine learning frameworks, neural architectures, and Oracle Cloud AI infrastructure.",
+    badge: "🏅 Oracle Certified",
     color: "#FB923C"
   },
   {
-    title: "Top 3% — Global LeetCode Biweekly Contest",
-    category: "Competitive Programming",
-    date: "2024",
-    description: "Achieved global top 3% percentile ranking among 25,000+ international algorithmic competitors.",
-    badge: "⚡ Top 3%",
+    title: "AWS ML Fundamentals & Generative AI Solutions",
+    category: "AWS Cloud & GenAI",
+    date: "2025",
+    description: "Certified in machine learning paradigms, model deployment on AWS, and generative AI design patterns.",
+    badge: "☁️ AWS AI/ML",
     color: "#A855F7"
   },
   {
-    title: "Open Source Contributor Milestone",
-    category: "Open Source",
-    date: "2023 — Present",
-    description: "Merged 30+ pull requests across open-source developer tooling, documentation, and web visual frameworks.",
-    badge: "🐙 1.2K+ Commits",
+    title: "Solutions Architecture Job Simulation — Forage",
+    category: "Industry Simulation",
+    date: "Jan 2026",
+    description: "Completed rigorous real-world scenario simulations in distributed system architecture, scalability design, and secure enterprise integration.",
+    badge: "🏛️ Solutions Architect",
     color: "#38BDF8"
   },
   {
-    title: "Smart India Hackathon Finalist",
-    category: "National Level",
-    date: "2023",
-    description: "Shortlisted among national top contenders for building a distributed cloud data orchestration prototype.",
-    badge: "⭐ Finalist",
+    title: "200+ DSA Problems Solved",
+    category: "Algorithmic Mastery",
+    date: "Ongoing",
+    description: "Consistent problem solver across LeetCode mastering data structures, graph traversals, and dynamic programming.",
+    badge: "⚡ 200+ DSA",
     color: "#4ADE80"
   }
 ];
