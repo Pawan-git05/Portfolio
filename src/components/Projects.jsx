@@ -1,18 +1,318 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { projectsData } from '../data/portfolioData';
 import { Icon } from './Icons';
 
+// Modal component for deep dive with interactive slider, key points, categorized tech stack & glossary
+const ProjectModal = ({ project, onClose }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeTab, setActiveTab] = useState('slider'); // 'slider', 'stack', 'keywords', 'code'
+  const [activeKeyword, setActiveKeyword] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (activeTab === 'slider') {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentSlide, activeTab]);
+
+  if (!project) return null;
+
+  const slides = project.slides || [];
+  const slideCount = slides.length;
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slideCount);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-md animate-fade-in">
+      <div 
+        className="relative w-full max-w-4xl bg-[#0D0D0E] border border-white/15 rounded-2xl shadow-[0_0_60px_rgba(168,85,247,0.25)] overflow-hidden my-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Top Header Bar */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#121215]/80">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: project.color || '#A855F7' }} />
+            <div>
+              <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider">
+                {project.category} // PROJECT DOSSIER
+              </span>
+              <h3 className="font-heading font-black text-lg sm:text-xl text-white">
+                {project.title}
+              </h3>
+            </div>
+          </div>
+
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+            aria-label="Close modal"
+          >
+            <Icon name="X" size={16} />
+          </button>
+        </div>
+
+        {/* Navigation Tabs inside Modal */}
+        <div className="flex items-center gap-2 px-6 pt-3 pb-2 border-b border-white/5 bg-[#0A0A0C] overflow-x-auto">
+          {[
+            { id: 'slider', label: `Step-by-Step Points (${slideCount})`, icon: 'Layers' },
+            { id: 'stack', label: 'Categorized Tech Stack', icon: 'Cpu' },
+            { id: 'keywords', label: 'Key Concepts & Definitions', icon: 'HelpCircle' },
+            ...(project.mockCodeLines ? [{ id: 'code', label: 'Code Snapshot', icon: 'Terminal' }] : [])
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all whitespace-nowrap cursor-pointer ${
+                activeTab === tab.id
+                  ? 'bg-gradient-to-r from-purple-600/30 to-orange-500/30 text-white border border-purple-500/50 shadow-sm'
+                  : 'text-neutral-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Icon name={tab.icon} size={13} />
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Modal Body Content */}
+        <div className="p-6 max-h-[70vh] overflow-y-auto">
+          
+          {/* TAB 1: INTERACTIVE STEP-BY-STEP SLIDER */}
+          {activeTab === 'slider' && slides.length > 0 && (
+            <div className="flex flex-col gap-5">
+              
+              {/* Slider Progress Bar & Dots */}
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-1.5">
+                  {slides.map((s, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentSlide(idx)}
+                      className={`h-2 rounded-full transition-all cursor-pointer ${
+                        currentSlide === idx
+                          ? 'w-8 bg-gradient-to-r from-purple-500 to-orange-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]'
+                          : 'w-2 bg-white/20 hover:bg-white/40'
+                      }`}
+                      title={`Go to point ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
+                  <span>POINT</span>
+                  <span className="text-orange-400 font-bold text-sm">
+                    {currentSlide + 1}
+                  </span>
+                  <span>/ {slideCount}</span>
+                </div>
+              </div>
+
+              {/* Active Slide Card */}
+              <div className="relative p-6 sm:p-7 rounded-xl bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/10 shadow-inner min-h-[220px] flex flex-col justify-between">
+                
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-purple-500/20 border border-purple-500/30 text-purple-300">
+                      STEP {slides[currentSlide].step}
+                    </span>
+                    <span className="text-[11px] font-mono text-orange-400 font-semibold">
+                      {slides[currentSlide].subtitle}
+                    </span>
+                  </div>
+
+                  <h4 className="font-heading font-black text-xl sm:text-2xl text-white mb-3">
+                    {slides[currentSlide].title}
+                  </h4>
+
+                  <p className="text-sm sm:text-base text-neutral-300 leading-relaxed">
+                    {slides[currentSlide].description}
+                  </p>
+                </div>
+
+                {slides[currentSlide].highlight && (
+                  <div className="mt-4 pt-3 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-neutral-400">
+                    <span className="text-purple-400 font-bold">// ARCHITECTURAL IMPACT:</span>
+                    <span className="text-white font-medium bg-white/5 px-2.5 py-1 rounded border border-white/10">
+                      {slides[currentSlide].highlight}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Controls: Prev / Next Buttons & Keyboard hint */}
+              <div className="flex items-center justify-between pt-2">
+                <span className="hidden sm:inline text-[11px] font-mono text-neutral-500">
+                  Use ← Left / Right → keys or click to cycle points
+                </span>
+
+                <div className="flex items-center gap-3 ml-auto">
+                  <button
+                    onClick={prevSlide}
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-white/10 bg-white/5 text-neutral-300 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all font-mono text-xs font-bold cursor-pointer"
+                  >
+                    <Icon name="ArrowLeft" size={14} />
+                    <span>Previous</span>
+                  </button>
+
+                  <button
+                    onClick={nextSlide}
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-purple-500/40 bg-purple-500/20 text-purple-200 hover:text-white hover:bg-purple-500/30 transition-all font-mono text-xs font-bold shadow-[0_0_15px_rgba(168,85,247,0.25)] cursor-pointer"
+                  >
+                    <span>Next Point</span>
+                    <Icon name="ArrowRight" size={14} />
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {/* TAB 2: CATEGORIZED TECH STACK */}
+          {activeTab === 'stack' && (
+            <div className="flex flex-col gap-5">
+              <div className="text-xs font-mono text-neutral-400">
+                // SYSTEM STACK DECONSTRUCTION (ALL RESUME-VERIFIED TECHNOLOGIES)
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {project.techStackCategorized && Object.entries(project.techStackCategorized).map(([category, list]) => (
+                  <div key={category} className="glass-card p-4 border-white/10 bg-[#101013]">
+                    <span className="text-[11px] font-mono font-bold text-orange-400 uppercase tracking-wider block mb-3">
+                      // {category}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {list.map((techItem) => (
+                        <span
+                          key={techItem}
+                          className="px-2.5 py-1 rounded-md text-xs font-mono bg-white/5 border border-white/10 text-neutral-200 hover:border-purple-500/40 hover:text-white transition-colors"
+                        >
+                          {techItem}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: KEY CONCEPTS & DEFINITIONS (CLICKABLE GLOSSARY) */}
+          {activeTab === 'keywords' && (
+            <div className="flex flex-col gap-4">
+              <div className="text-xs font-mono text-neutral-400">
+                // TECHNICAL KEYWORDS GLOSSARY — CLICK ANY TERM FOR DETAILED CONTEXT
+              </div>
+
+              <div className="grid gap-3">
+                {project.keywords?.map((item, idx) => {
+                  const isExpanded = activeKeyword === idx;
+                  return (
+                    <div
+                      key={item.term}
+                      onClick={() => setActiveKeyword(isExpanded ? null : idx)}
+                      className={`p-4 rounded-xl border transition-all cursor-pointer ${
+                        isExpanded
+                          ? 'border-purple-500/50 bg-purple-500/10 shadow-[0_0_20px_rgba(168,85,247,0.15)]'
+                          : 'border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono font-bold text-purple-400">{item.term}</span>
+                          <span className="text-[10px] font-mono text-neutral-500">// KEYWORD</span>
+                        </div>
+                        <Icon name={isExpanded ? 'ChevronUp' : 'ChevronDown'} size={14} color="#A855F7" />
+                      </div>
+                      
+                      <div className={`mt-2 text-xs sm:text-sm text-neutral-300 font-mono leading-relaxed ${isExpanded ? 'block' : 'line-clamp-1 text-neutral-400'}`}>
+                        {item.definition}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: MOCK CODE WINDOW */}
+          {activeTab === 'code' && project.mockCodeLines && (
+            <div className="mock-code-window shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+              <div className="mock-code-header">
+                <div className="window-dots">
+                  <span className="window-dot bg-red-500/80" />
+                  <span className="window-dot bg-yellow-500/80" />
+                  <span className="window-dot bg-green-500/80" />
+                </div>
+                <span className="text-neutral-400 text-xs font-mono">
+                  {project.mockFileName}
+                </span>
+                <span className="text-[10px] text-purple-400 font-bold font-mono">SOURCE EXCERPT</span>
+              </div>
+              <div className="p-4 overflow-x-auto text-xs font-mono text-neutral-300 bg-[#080808] leading-relaxed">
+                {project.mockCodeLines.map((line, i) => (
+                  <div key={i} className="flex gap-4">
+                    <span className="text-neutral-600 select-none w-5 text-right">{i + 1}</span>
+                    <span className="text-purple-300">{line}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        {/* Modal Bottom Action Bar */}
+        <div className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-[#121215]/80">
+          <div className="flex items-center gap-3">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-white/10 bg-white/5 text-xs font-mono font-bold text-neutral-300 hover:text-white hover:border-white/30 transition-all"
+            >
+              <Icon name="Github" size={14} />
+              <span>GitHub Repo</span>
+            </a>
+
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-purple-500/40 bg-purple-500/10 text-xs font-mono font-bold text-purple-300 hover:text-white hover:bg-purple-500/20 transition-all"
+              >
+                <Icon name="ExternalLink" size={14} />
+                <span>Visit Project</span>
+              </a>
+            )}
+          </div>
+
+          <button
+            onClick={onClose}
+            className="px-4 py-1.5 rounded-lg border border-white/10 text-xs font-mono font-bold text-neutral-400 hover:text-white transition-all cursor-pointer"
+          >
+            Close
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
 export const Projects = () => {
-  const categories = ['All', 'AI / Machine Learning', 'Systems / Full Stack', 'Compiler Design', 'Full Stack', 'Frontend'];
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [activeTab, setActiveTab] = useState('solution'); // 'problem', 'solution', 'challenges', 'code'
-
-  const flagshipProject = projectsData.find((p) => p.featured) || projectsData[0];
-  const secondaryProjects = projectsData.filter((p) => p.id !== flagshipProject?.id);
-
-  const filteredSecondary = activeCategory === 'All'
-    ? secondaryProjects
-    : secondaryProjects.filter((p) => p.category === activeCategory);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <section id="projects" className="section-padding relative">
@@ -23,250 +323,43 @@ export const Projects = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="section-label">// WORKS & CASE STUDIES</div>
+          <div className="section-label">// PROJECTS & CASE STUDIES</div>
           <h2 className="section-title">
-            Featured <span className="bg-gradient-cyber">Engineering</span> Projects
+            Engineered <span className="bg-gradient-cyber">Software Systems</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed">
-            Production systems, deep-learning pipelines, compilers, and interactive developer tooling engineered for scale, speed, and reliability.
+            Click on any project to launch its interactive slider dossier with step-by-step point breakdown, verified architecture, categorized tech stacks, and keyword glossaries.
           </p>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
-                  isActive
-                    ? 'bg-gradient-to-r from-purple-600 to-purple-400 text-white border border-white/20 shadow-[0_0_20px_rgba(168,85,247,0.3)]'
-                    : 'bg-white/[0.03] text-neutral-400 border border-white/5 hover:text-white hover:bg-white/[0.08]'
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ============================================================
-             FLAGSHIP PROJECT SPOTLIGHT (Deep Dive Case Study)
-             ============================================================ */}
-        {flagshipProject && (activeCategory === 'All' || activeCategory === flagshipProject.category) && (
-          <div className="mb-14">
-            <div className="glass-card p-6 sm:p-9 border-purple-500/30 shadow-[0_0_40px_rgba(124,58,237,0.15)] relative overflow-hidden">
-              
-              {/* Top Banner & Telemetry Badges */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
-                <div className="flex items-center gap-3">
-                  <div className="tag tag-purple">
-                    <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                    <span>FLAGSHIP SYSTEM</span>
-                  </div>
-                  <span className="text-xs font-mono text-neutral-400">{flagshipProject.category}</span>
-                </div>
-
-                {/* Telemetry Stats */}
-                {flagshipProject.stats && (
-                  <div className="flex items-center gap-3 text-xs font-mono">
-                    <div className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-300">
-                      <span className="text-purple-400 font-bold mr-1">INFERENCES:</span>
-                      {flagshipProject.stats.inferences}
-                    </div>
-                    <div className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-300">
-                      <span className="text-orange-400 font-bold mr-1">LATENCY:</span>
-                      {flagshipProject.stats.latency}
-                    </div>
-                    <div className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-300">
-                      <span className="text-green-400 font-bold mr-1">ACCURACY:</span>
-                      {flagshipProject.stats.accuracy}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Main Content Grid */}
-              <div className="grid lg:grid-cols-12 gap-8 mt-6 items-start">
-                
-                {/* Left Col: Titles, Description & Case Study Tabs */}
-                <div className="lg:col-span-7 flex flex-col gap-5">
-                  <div>
-                    <h3 className="font-heading font-black text-2xl sm:text-4xl text-white tracking-tight">
-                      {flagshipProject.title}
-                    </h3>
-                    <p className="text-sm font-mono text-orange-400 mt-1">
-                      {flagshipProject.subtitle}
-                    </p>
-                  </div>
-
-                  <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
-                    {flagshipProject.longDescription || flagshipProject.description}
-                  </p>
-
-                  {/* Case Study Tab Navigation */}
-                  <div className="flex items-center gap-2 pt-2 border-b border-white/5 pb-2">
-                    {[
-                      { id: 'solution', label: 'Solution Architecture' },
-                      { id: 'problem', label: 'Problem' },
-                      { id: 'challenges', label: 'Challenges & Learnings' }
-                    ].map((tab) => (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
-                          activeTab === tab.id
-                            ? 'bg-white/10 text-white border border-purple-500/40 shadow-sm'
-                            : 'text-neutral-400 hover:text-white'
-                        }`}
-                      >
-                        {tab.label}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Tab Contents */}
-                  <div className="text-xs sm:text-sm text-neutral-300 leading-relaxed min-h-[90px] bg-white/[0.02] border border-white/5 rounded-xl p-4">
-                    {activeTab === 'solution' && (
-                      <div>
-                        <span className="text-purple-400 font-mono font-bold block mb-1">// ARCHITECTURE & SOLUTION:</span>
-                        {flagshipProject.solution}
-                      </div>
-                    )}
-                    {activeTab === 'problem' && (
-                      <div>
-                        <span className="text-orange-400 font-mono font-bold block mb-1">// PROBLEM STATEMENT:</span>
-                        {flagshipProject.problem}
-                      </div>
-                    )}
-                    {activeTab === 'challenges' && (
-                      <div>
-                        <span className="text-green-400 font-mono font-bold block mb-1">// CORE CHALLENGES OVERCOME:</span>
-                        <ul className="list-disc list-inside space-y-1 text-neutral-300">
-                          {flagshipProject.challenges?.map((c, i) => (
-                            <li key={i}>{c}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Tech Stack Pills */}
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {flagshipProject.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/5 border border-white/10 text-neutral-300"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action CTAs */}
-                  <div className="flex items-center gap-4 pt-2">
-                    <a
-                      href={flagshipProject.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary"
-                    >
-                      <span>Live Deployment</span>
-                      <Icon name="ExternalLink" size={15} />
-                    </a>
-
-                    <a
-                      href={flagshipProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary"
-                    >
-                      <Icon name="Github" size={15} />
-                      <span>Source Code</span>
-                    </a>
-                  </div>
-                </div>
-
-                {/* Right Col: Interactive Mock Code / Pipeline Window */}
-                <div className="lg:col-span-5">
-                  <div className="mock-code-window shadow-[0_0_30px_rgba(0,0,0,0.8)]">
-                    <div className="mock-code-header">
-                      <div className="window-dots">
-                        <span className="window-dot bg-red-500/80" />
-                        <span className="window-dot bg-yellow-500/80" />
-                        <span className="window-dot bg-green-500/80" />
-                      </div>
-                      <span className="text-neutral-400 text-[11px]">
-                        {flagshipProject.mockFileName || 'pipeline.py'}
-                      </span>
-                      <span className="text-[10px] text-purple-400 font-bold">PYTHON 3.11</span>
-                    </div>
-
-                    <div className="p-4 overflow-x-auto text-[11px] sm:text-xs font-mono text-neutral-300 bg-[#080808] leading-relaxed">
-                      {flagshipProject.mockCodeLines?.map((line, i) => (
-                        <div key={i} className="flex gap-4">
-                          <span className="text-neutral-600 select-none w-4 text-right">{i + 1}</span>
-                          <span className="text-purple-300">{line}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="px-4 py-2 bg-[#0F0F0F] border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-neutral-500">
-                      <span>STATUS: INFERENCE ONLINE</span>
-                      <span className="text-orange-400 font-bold">SUB-100MS</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================
-             SECONDARY PROJECTS GRID
-             ============================================================ */}
+        {/* 3 Core Projects Display Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSecondary.map((proj) => (
+          {projectsData.map((proj) => (
             <div
               key={proj.id}
-              className="glass-card p-6 flex flex-col justify-between group hover:border-purple-500/40 hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] transition-all duration-300"
+              onClick={() => setSelectedProject(proj)}
+              className="glass-card p-6 flex flex-col justify-between group hover:border-purple-500/50 hover:shadow-[0_0_35px_rgba(168,85,247,0.25)] transition-all duration-300 cursor-pointer relative overflow-hidden"
             >
+              {/* Subtle accent line on hover */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
               <div>
-                {/* Card Top: Category & Category Tag */}
+                {/* Card Top: Category & Action */}
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">
                     {proj.category}
                   </span>
-                  <div className="flex items-center gap-2">
-                    <a
-                      href={proj.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 bg-white/[0.02] text-neutral-400 hover:text-white hover:border-white/30 transition-all"
-                      aria-label="GitHub Repository"
-                    >
-                      <Icon name="Github" size={14} />
-                    </a>
-                    <a
-                      href={proj.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 bg-white/[0.02] text-neutral-400 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
-                      aria-label="Live Demo"
-                    >
-                      <Icon name="ExternalLink" size={14} />
-                    </a>
+                  
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-purple-400 group-hover:text-purple-300 font-bold">
+                    <span>EXPLORE</span>
+                    <Icon name="ArrowRight" size={13} />
                   </div>
                 </div>
 
                 {/* Title & Subtitle */}
-                <h4 className="font-heading font-bold text-xl text-white group-hover:text-purple-300 transition-colors">
+                <h3 className="font-heading font-black text-xl text-white group-hover:text-purple-300 transition-colors">
                   {proj.title}
-                </h4>
+                </h3>
                 <p className="text-xs font-mono text-orange-400 mt-1 mb-3">
                   {proj.subtitle}
                 </p>
@@ -276,24 +369,19 @@ export const Projects = () => {
                   {proj.description}
                 </p>
 
-                {/* Optional Mock Code Preview */}
-                {proj.mockCodeLines && (
-                  <div className="mb-5 mock-code-window text-[10px] bg-[#0A0A0A]">
-                    <div className="mock-code-header py-1 px-3">
-                      <span className="text-[9px] text-neutral-400">{proj.mockFileName}</span>
-                    </div>
-                    <div className="p-2.5 font-mono text-neutral-300">
-                      {proj.mockCodeLines.slice(0, 3).map((l, i) => (
-                        <div key={i} className="truncate text-purple-300/90">{l}</div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                {/* Interactive Points Pill Indicator */}
+                <div className="mb-4 p-2.5 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-between text-[11px] font-mono text-neutral-400">
+                  <span className="flex items-center gap-1.5 text-purple-300">
+                    <Icon name="Layers" size={13} />
+                    <span>{proj.slides?.length || 3} Detailed Steps</span>
+                  </span>
+                  <span className="text-orange-400 font-semibold">Click to slide →</span>
+                </div>
               </div>
 
-              {/* Bottom: Tech Tags */}
+              {/* Bottom: Tech Stack Tags */}
               <div className="pt-4 border-t border-white/5 flex flex-wrap gap-1.5">
-                {proj.tech.map((t) => (
+                {proj.tech.slice(0, 5).map((t) => (
                   <span
                     key={t}
                     className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.03] border border-white/5 text-neutral-400"
@@ -301,12 +389,25 @@ export const Projects = () => {
                     {t}
                   </span>
                 ))}
+                {proj.tech.length > 5 && (
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-mono text-purple-400">
+                    +{proj.tech.length - 5} more
+                  </span>
+                )}
               </div>
             </div>
           ))}
         </div>
 
       </div>
+
+      {/* Interactive Modal Slider & Dossier */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </section>
   );
 };

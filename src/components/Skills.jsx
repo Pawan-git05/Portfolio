@@ -210,8 +210,7 @@ export const Skills = () => {
             Technologies &amp; <span className="bg-gradient-orange">Capabilities</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed">
-            A comprehensive matrix of programming languages, machine learning frameworks, distributed
-            database systems, and developer tooling mastered over years of hands-on engineering.
+            Curated technical skills covering programming languages, web technologies, relational databases, developer tools, and core computer science fundamentals directly from academic and project experience.
           </p>
         </div>
 

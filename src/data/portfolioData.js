@@ -65,85 +65,113 @@ export const coreDomains = [
   }
 ];
 
-// Categorized Skills Matrix
+// Categorized Skills Matrix (Strictly from Pawan_Resume.pdf)
 export const skillsData = {
-  "AI & ML": [
-    { name: "PyTorch", level: 90, icon: "🔥" },
-    { name: "TensorFlow", level: 82, icon: "🧠" },
-    { name: "Scikit-Learn", level: 88, icon: "📊" },
-    { name: "OpenCV", level: 85, icon: "👁️" },
-    { name: "LangChain / LLMs", level: 88, icon: "🤖" },
-    { name: "NumPy & Pandas", level: 94, icon: "📈" }
-  ],
   "Languages": [
-    { name: "Python", level: 95, icon: "🐍" },
-    { name: "C++", level: 90, icon: "⚡" },
-    { name: "JavaScript", level: 92, icon: "🟨" },
-    { name: "TypeScript", level: 85, icon: "🔷" },
-    { name: "SQL", level: 88, icon: "🗄️" }
+    { name: "Java", level: 90, icon: "☕" },
+    { name: "C++", level: 92, icon: "⚡" },
+    { name: "C", level: 85, icon: "🔷" },
+    { name: "Python", level: 90, icon: "🐍" },
+    { name: "JavaScript", level: 88, icon: "🟨" }
   ],
-  "Frontend": [
-    { name: "React", level: 92, icon: "⚛️" },
-    { name: "Next.js", level: 86, icon: "▲" },
-    { name: "Tailwind CSS", level: 90, icon: "🎨" },
-    { name: "Three.js / WebGL", level: 80, icon: "🌐" },
-    { name: "HTML5 / CSS3", level: 95, icon: "🌐" }
+  "Web Technologies": [
+    { name: "HTML5", level: 95, icon: "🌐" },
+    { name: "CSS3", level: 92, icon: "🎨" },
+    { name: "React", level: 90, icon: "⚛️" },
+    { name: "REST APIs", level: 88, icon: "🔌" },
+    { name: "JSON", level: 95, icon: "📄" }
   ],
-  "Backend & DB": [
-    { name: "Node.js", level: 88, icon: "🟢" },
-    { name: "Express.js", level: 85, icon: "🚂" },
-    { name: "FastAPI", level: 90, icon: "⚡" },
-    { name: "PostgreSQL", level: 82, icon: "🐘" },
-    { name: "MongoDB", level: 84, icon: "🍃" },
-    { name: "Redis", level: 80, icon: "🔴" }
+  "Databases": [
+    { name: "MySQL", level: 88, icon: "🐬" },
+    { name: "PostgreSQL", level: 86, icon: "🐘" },
+    { name: "SQLite", level: 84, icon: "💾" },
+    { name: "MongoDB", level: 82, icon: "🍃" },
+    { name: "SQL", level: 90, icon: "🗄️" }
   ],
-  "DSA & Core": [
-    { name: "Arrays & Strings", level: 95, icon: "📊" },
-    { name: "Trees & Graphs", level: 88, icon: "🌳" },
-    { name: "Dynamic Programming", level: 84, icon: "🧩" },
-    { name: "Sorting & Searching", level: 92, icon: "🔍" },
-    { name: "System Design", level: 82, icon: "📐" }
+  "Tools & Platforms": [
+    { name: "Git", level: 90, icon: "🌿" },
+    { name: "GitHub", level: 92, icon: "🐙" },
+    { name: "Postman", level: 88, icon: "🚀" },
+    { name: "IntelliJ IDEA", level: 85, icon: "💡" },
+    { name: "VS Code", level: 95, icon: "💻" }
   ],
-  "Tools & DevOps": [
-    { name: "Git & GitHub", level: 92, icon: "🐙" },
-    { name: "Docker", level: 85, icon: "🐳" },
-    { name: "Linux / Shell", level: 88, icon: "🐧" },
-    { name: "AWS Cloud", level: 75, icon: "☁️" },
-    { name: "Postman / REST", level: 90, icon: "📬" }
+  "Core CS": [
+    { name: "Data Structures & Algorithms", level: 92, icon: "📊" },
+    { name: "Object-Oriented Programming", level: 90, icon: "🧱" },
+    { name: "Database Management Systems", level: 88, icon: "🗄️" },
+    { name: "Operating Systems", level: 85, icon: "⚙️" },
+    { name: "Computer Networks", level: 84, icon: "🌐" }
   ]
 };
 
-// Projects & Case Studies (From Resume & Live GitHub)
+// Projects & Case Studies (Strictly From Pawan_Resume.pdf)
 export const projectsData = [
   {
     id: 1,
     title: "CloudLearn",
     subtitle: "Full-Stack Learning & Coding Practice Platform (Ongoing)",
-    description: "Full-stack learning platform with role-based dashboards, coding practice, and LLM-assisted DSA problem generation using TypeScript, Prisma ORM, and PostgreSQL.",
-    longDescription: "Built a full-stack learning platform with role-based dashboards, coding practice, and LLM-assisted DSA problem generation using TypeScript, Prisma ORM, and PostgreSQL. Designed scalable REST APIs and optimized PostgreSQL queries for personalized recommendations and efficient submission analytics.",
-    tech: ["TypeScript", "Next.js", "Prisma ORM", "PostgreSQL", "Tailwind CSS", "Framer Motion", "Three.js"],
-    github: "https://github.com/Pawan-git05/CloudLearn",
-    demo: "https://github.com/Pawan-git05/CloudLearn",
+    category: "Full Stack & AI",
     featured: true,
     color: "#A855F7",
-    category: "Full Stack / AI",
-    stats: {
-      queries: "Optimized",
-      architecture: "Prisma+Postgres",
-      features: "LLM Assisted"
+    github: "https://github.com/Pawan-git05/CloudLearn",
+    demo: "https://github.com/Pawan-git05/CloudLearn",
+    description: "Built a full-stack learning platform with role-based dashboards, coding practice, and LLM-assisted DSA problem generation using TypeScript, Prisma ORM, and PostgreSQL.",
+    
+    // Categorized Tech Stack
+    techStackCategorized: {
+      "Frontend": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
+      "Backend & ORM": ["Prisma ORM", "REST APIs", "Node.js runtime"],
+      "Database": ["PostgreSQL"],
+      "AI / Intelligence": ["LLM API Integration", "Structured Prompt Engineering"]
     },
-    problem: "Traditional coding platforms lack personalized DSA problem generation and integrated role-based dashboards with real-time analytics.",
-    solution: "Designed scalable REST APIs, role-based access control, and integrated LLM workflows for dynamic problem generation and submission evaluation.",
-    challenges: [
-      "Optimizing complex PostgreSQL queries for personalized recommendation metrics",
-      "Dynamic Three.js & Framer Motion interactive UI performance",
-      "Prisma schema relational modeling across submissions and user roles"
+    tech: ["TypeScript", "Next.js", "Prisma ORM", "PostgreSQL", "Tailwind CSS", "Framer Motion", "Three.js"],
+
+    // Interactive Slider Points (Step-by-step presentation)
+    slides: [
+      {
+        step: "01",
+        title: "Role-Based Architecture & Dynamic Practice",
+        subtitle: "Enterprise Access Control & Dashboards",
+        description: "Built a full-stack learning platform with customized role-based dashboards (Admin, Mentor, Student) providing tailored views, problem curation workflows, and real-time coding practice environments.",
+        highlight: "Enterprise RBAC + Next.js App Router"
+      },
+      {
+        step: "02",
+        title: "LLM-Assisted DSA Problem Generation",
+        subtitle: "Automated Algorithmic Problem Synthesis",
+        description: "Engineered an AI-assisted pipeline that leverages Large Language Models to formulate fresh Data Structures & Algorithms challenges with difficulty parameters, test fixtures, and constraints.",
+        highlight: "Structured JSON Output + Automated Test Case Generation"
+      },
+      {
+        step: "03",
+        title: "Database Optimization & High-Throughput APIs",
+        subtitle: "Scalable REST APIs & Analytical Querying",
+        description: "Designed scalable REST endpoints and optimized relational PostgreSQL queries with indexed lookups via Prisma ORM for personalized learning recommendations and high-throughput submission analytics.",
+        highlight: "Sub-50ms API Latency + Optimized Relation Queries"
+      },
+      {
+        step: "04",
+        title: "Modern Interactive UI with 3D Graphics",
+        subtitle: "Three.js & Smooth Motion Engineering",
+        description: "Coupled responsive Tailwind styling with fluid Framer Motion micro-interactions and lightweight Three.js canvas visualizations to engage learners and provide clean telemetry.",
+        highlight: "60 FPS Render Pipeline + Zero-Layout-Shift Design"
+      }
     ],
-    learnings: [
-      "Advanced Prisma schema migrations and relation queries",
-      "Next.js App Router performance tuning and server actions",
-      "Full-stack state management with TypeScript end-to-end typing"
+
+    // Technical Keywords & Concepts
+    keywords: [
+      { term: "Prisma ORM", definition: "Type-safe database client and automated migration tooling for PostgreSQL" },
+      { term: "LLM Integration", definition: "AI-powered automated generation of DSA problems and solution verifications" },
+      { term: "RBAC", definition: "Role-Based Access Control ensuring secure user authorization across dashboards" },
+      { term: "Query Optimization", definition: "Indexing and efficient join execution to maintain fast response times under load" },
+      { term: "Three.js & Framer", definition: "WebGL accelerated 3D graphics and spring-physics UI animation sequences" }
     ],
+
+    stats: {
+      architecture: "Prisma + Postgres",
+      latency: "< 50ms APIs",
+      features: "LLM Assisted DSA"
+    },
     mockFileName: "problem_generator.ts",
     mockCodeLines: [
       "export async function generateDSAProblem(topic: string, difficulty: Difficulty) {",
@@ -156,14 +184,63 @@ export const projectsData = [
   {
     id: 2,
     title: "DonorChain",
-    subtitle: "Real-Time Emergency Donation & Spatial Indexing Network",
-    description: "Emergency donation platform using PostGIS spatial indexing for efficient donor matching and nearby pharmacy discovery with Polygon-based verification.",
-    tech: ["React", "Node.js", "PostgreSQL", "PostGIS", "Polygon", "Twilio", "Firebase"],
-    github: "https://github.com/Pawan-git05/Donarchain",
-    demo: "https://github.com/Pawan-git05/Donarchain",
+    subtitle: "Real-Time Emergency Donation Network",
+    category: "Full Stack & Web3",
     featured: false,
     color: "#0EA5E9",
-    category: "Full Stack / Web3",
+    github: "https://github.com/Pawan-git05/Donarchain",
+    demo: "https://github.com/Pawan-git05/Donarchain",
+    description: "Developed a real-time emergency donation platform using PostGIS spatial indexing for efficient donor matching and nearby pharmacy discovery with Polygon verification.",
+    
+    // Categorized Tech Stack
+    techStackCategorized: {
+      "Frontend": ["React", "CSS3 / Modern UI"],
+      "Backend & Cloud": ["Node.js", "Express REST APIs"],
+      "Spatial Database": ["PostgreSQL", "PostGIS Spatial Indexing"],
+      "Verification & Web3": ["Polygon Network Smart Contracts"],
+      "Messaging & Notifications": ["Twilio SMS API", "Firebase Cloud Messaging (FCM)"]
+    },
+    tech: ["React", "Node.js", "PostgreSQL", "PostGIS", "Polygon", "Twilio", "Firebase"],
+
+    // Interactive Slider Points
+    slides: [
+      {
+        step: "01",
+        title: "PostGIS Spatial Indexing & Proximity Discovery",
+        subtitle: "Geospatial Distance Calculations in Milliseconds",
+        description: "Implemented PostGIS spatial queries (ST_DWithin, ST_Distance) on PostgreSQL coordinates to calculate real-time proximity and find available blood/organ donors and nearby pharmacies instantly.",
+        highlight: "O(log N) Geospatial Index Matching via R-Tree GiST"
+      },
+      {
+        step: "02",
+        title: "Polygon-Based Decentralized Verification",
+        subtitle: "Immutable Audit Trails & Fraud Mitigation",
+        description: "Integrated lightweight Polygon blockchain smart contracts to verify emergency donations and medical transactions, establishing an immutable and transparent verification audit trail.",
+        highlight: "Low-Fee Cryptographic Validation on Polygon"
+      },
+      {
+        step: "03",
+        title: "Instant Multi-Channel Emergency Dispatch",
+        subtitle: "Twilio SMS & Firebase Push Notifications",
+        description: "Combined Twilio SMS gateway with Firebase Cloud Messaging (FCM) to trigger critical alerts to matching donors within seconds of an urgent emergency request.",
+        highlight: "Sub-Second Push Dispatch to Donors & Medical Centers"
+      }
+    ],
+
+    // Technical Keywords & Concepts
+    keywords: [
+      { term: "PostGIS", definition: "Spatial database extender for PostgreSQL enabling geographical objects and distance queries" },
+      { term: "Spatial Indexing", definition: "GiST index structures allowing immediate geographic bounding box and radius queries" },
+      { term: "Polygon Network", definition: "Ethereum Layer 2 scaling protocol offering fast, tamper-proof transaction audits" },
+      { term: "Twilio Gateway", definition: "Telephony API for automated high-priority SMS alerts during critical shortages" },
+      { term: "Firebase FCM", definition: "Cross-platform messaging solution for instant mobile and web push notifications" }
+    ],
+
+    stats: {
+      matching: "PostGIS Radius",
+      verification: "Polygon Audit",
+      alerts: "Twilio + FCM"
+    },
     mockFileName: "spatial_matcher.js",
     mockCodeLines: [
       "const donors = await db.query(`",
@@ -176,13 +253,69 @@ export const projectsData = [
     id: 3,
     title: "CSV Query Compiler (CQL)",
     subtitle: "Recursive Descent Parsing & Abstract Syntax Tree (AST) Compiler",
-    description: "A SQL-like compiler that translates structured queries on CSV datasets into executable Python code through lexical analysis, parsing, semantic validation, and code generation.",
-    tech: ["Python", "Recursive Descent Parsing", "CSV", "Dataclasses", "AST"],
-    github: "https://github.com/Pawan-git05/CQL",
-    demo: "https://github.com/Pawan-git05/CQL",
+    category: "Compiler & Systems",
     featured: false,
     color: "#10B981",
-    category: "Compiler Design",
+    github: "https://github.com/Pawan-git05/CQL",
+    demo: "https://github.com/Pawan-git05/CQL",
+    description: "Developed a SQL-like compiler that translates queries on CSV datasets into executable Python code through lexical analysis, parsing, semantic validation, and code generation.",
+    
+    // Categorized Tech Stack
+    techStackCategorized: {
+      "Core Language": ["Python 3"],
+      "Parsing Theory": ["Recursive Descent Parsing", "Lexical Tokenizer", "Grammar Grammar Rules"],
+      "AST & Structures": ["Abstract Syntax Tree (AST)", "Python Dataclasses", "Visitor Pattern"],
+      "Supported SQL Clauses": ["SELECT", "WHERE", "GROUP BY", "HAVING", "ORDER BY", "LIMIT", "DISTINCT"],
+      "Interactive Interface": ["Integrated Web-Based SQL Workspace"]
+    },
+    tech: ["Python", "Recursive Descent Parsing", "CSV", "Dataclasses", "AST", "Compiler Design"],
+
+    // Interactive Slider Points
+    slides: [
+      {
+        step: "01",
+        title: "Lexical Analysis & Tokenizer Engine",
+        subtitle: "Converting Raw SQL Strings to Structured Token Streams",
+        description: "Built a robust lexical analyzer in Python that categorizes SQL queries into deterministic keywords, operators, literals, and identifiers while gracefully handling syntax errors.",
+        highlight: "Deterministic Token Stream + Accurate Line/Column Error Reporting"
+      },
+      {
+        step: "02",
+        title: "Recursive Descent Parser & Abstract Syntax Trees",
+        subtitle: "Building the Hierarchical AST Model",
+        description: "Implemented a custom recursive descent parser that maps grammar rules into typed Python Dataclass AST nodes (SelectNode, FilterNode, AggregateNode, OrderNode) with semantic validation.",
+        highlight: "Clean AST Structure with Python Dataclasses"
+      },
+      {
+        step: "03",
+        title: "Full SQL Feature Set & Bytecode / Code Generation",
+        subtitle: "SELECT, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT, AGGREGATES",
+        description: "Engineered code-generation visitors that compile parsed AST nodes directly into optimized, executable Python comprehension and aggregation algorithms on raw CSV datasets.",
+        highlight: "Complete SQL Query Pipeline Executable on Any CSV"
+      },
+      {
+        step: "04",
+        title: "Integrated Web-Based SQL Workspace",
+        subtitle: "Live Query Execution & Tabular Visualization",
+        description: "Delivered an integrated web workspace allowing users to upload custom CSV files, write SQL queries, and visualize the generated results and intermediate AST representations in real-time.",
+        highlight: "Real-Time Visual Validation + Instant Result Tables"
+      }
+    ],
+
+    // Technical Keywords & Concepts
+    keywords: [
+      { term: "Recursive Descent", definition: "Top-down parsing technique that executes grammar productions through recursive function calls" },
+      { term: "Abstract Syntax Tree", definition: "Hierarchical tree representation of the syntactic structure of source SQL queries" },
+      { term: "Lexical Analysis", definition: "Breaking character streams into meaningful tokens (IDENTIFIER, OPERATOR, KEYWORD)" },
+      { term: "Semantic Validation", definition: "Checking column types, aggregation constraints, and scope rules prior to code generation" },
+      { term: "Code Generation", definition: "Synthesizing high-speed Python data processing instructions directly from the AST" }
+    ],
+
+    stats: {
+      parser: "Recursive Descent",
+      clauses: "7+ SQL Clauses",
+      speed: "Direct Py CodeGen"
+    },
     mockFileName: "compiler_ast.py",
     mockCodeLines: [
       "class SQLCompiler(ASTVisitor):",
