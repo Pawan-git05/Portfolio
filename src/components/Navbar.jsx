@@ -1,188 +1,166 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { navLinks, personalInfo } from '../data/portfolioData';
+import { Icon } from './Icons';
 
-export default function Navbar() {
-  const [navOpen, setNavOpen] = useState(false);
-  const [resumeOpen, setResumeOpen] = useState(false);
+export const Navbar = ({ onOpenTerminal }) => {
+  const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.pageYOffset > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      setScrolled(window.scrollY > 40);
+
+      // Section tracking
+      const sections = navLinks.map((link) => document.getElementById(link.id));
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(navLinks[i].id);
+          break;
+        }
       }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (anchorId) => {
-    setNavOpen(false);
-    if (location.pathname !== '/') {
-      navigate('/');
-      // Wait for navigation and mount, then scroll
-      setTimeout(() => {
-        const el = document.getElementById(anchorId);
-        if (el) {
-          const offset = 100;
-          const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      const el = document.getElementById(anchorId);
-      if (el) {
-        const offset = 100;
-        const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
+  const scrollToSection = (id) => {
+    setMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
-  const toggleNav = () => setNavOpen(prev => !prev);
-  const openResume = () => {
-    setResumeOpen(true);
-    setNavOpen(false);
-    document.body.style.overflow = 'hidden';
-  };
-  const closeResume = () => {
-    setResumeOpen(false);
-    document.body.style.overflow = '';
-  };
-
-  // Close nav on escape
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setNavOpen(false);
-        closeResume();
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
   return (
     <>
-      {/* Floating fixed navbar */}
-      <nav 
-        className="navbar" 
-        id="navbar"
-        style={{
-          boxShadow: scrolled ? '0 4px 40px rgba(0,0,0,0.2)' : '0 4px 30px rgba(0,0,0,0.15)'
-        }}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? 'py-3' : 'py-5'
+        }`}
       >
-        <span className="navbar__name" onClick={() => handleNavClick('hero')} style={{ cursor: 'pointer' }}>
-          Pawan Singh
-        </span>
-        <button 
-          className="navbar__menu-btn" 
-          id="menu-toggle" 
-          aria-label="Toggle navigation menu"
-          onClick={toggleNav}
-          aria-expanded={navOpen}
-        >
-          <span className="navbar__dots">
-            <span></span><span></span><span></span>
-          </span>
-        </button>
-      </nav>
+        <div className="section-container">
+          <nav className="flex items-center justify-between px-5 py-2.5 rounded-full border border-white/10 bg-[#0A0A0A]/75 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+            
+            {/* Logo */}
+            <button
+              onClick={() => scrollToSection('home')}
+              className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_10px_#A855F7] group-hover:bg-orange-500 group-hover:shadow-[0_0_10px_#F97316] transition-all" />
+              <span className="font-mono text-sm font-black tracking-wider text-white group-hover:text-purple-400 transition-colors">
+                PS<span className="text-orange-400">.dev</span>
+              </span>
+            </button>
 
-      {/* Nav Dropdown */}
-      <div className={`nav-dropdown ${navOpen ? 'active' : ''}`} id="nav-dropdown">
-        <ul className="nav-dropdown__list">
-          <li><button onClick={() => handleNavClick('hero')} className="nav-dropdown__link link-button">Home</button></li>
-          <li><button onClick={() => handleNavClick('about')} className="nav-dropdown__link link-button">About Me</button></li>
-          <li><button onClick={() => handleNavClick('skills')} className="nav-dropdown__link link-button">Skills</button></li>
-          <li><button onClick={() => handleNavClick('projects')} className="nav-dropdown__link link-button">Projects</button></li>
-          <li><button onClick={() => handleNavClick('contact')} className="nav-dropdown__link link-button">Contact</button></li>
-        </ul>
-        <div className="nav-dropdown__divider"></div>
-        <button className="nav-dropdown__cta" id="nav-resume-btn" onClick={openResume}>
-          View Resume
-        </button>
-      </div>
-
-      {/* Resume Modal */}
-      {resumeOpen && (
-        <div className="resume-overlay active" id="resume-overlay" onClick={(e) => e.target.id === 'resume-overlay' && closeResume()}>
-          <div className="resume-modal">
-            <div className="resume-modal__header">
-              <h3 className="resume-modal__title">Resume</h3>
-              <button className="resume-modal__close" id="resume-close" aria-label="Close resume" onClick={closeResume}>✕</button>
+            {/* Desktop Navigation Links */}
+            <div className="hidden lg:flex items-center gap-1.5">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollToSection(link.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                      isActive
+                        ? 'text-white bg-white/10 font-bold border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)]'
+                        : 'text-neutral-400 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span className="text-[10px] text-purple-400/80 mr-1">{link.num}</span>
+                    {link.label}
+                  </button>
+                );
+              })}
             </div>
 
-            <div className="resume-modal__body">
-              <div className="resume-content">
-                <div className="resume-name">Pawan Singh</div>
-                <div className="resume-subtitle">B.Tech CS, GEHU &nbsp;|&nbsp; 2027 Batch</div>
+            {/* Actions: Terminal Shortcut + Resume Button + Mobile Toggle */}
+            <div className="flex items-center gap-2.5">
+              {/* Terminal Trigger */}
+              <button
+                onClick={onOpenTerminal}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono border border-orange-500/30 bg-orange-500/5 text-orange-400 hover:bg-orange-500/15 hover:border-orange-500/60 transition-all cursor-pointer shadow-[0_0_10px_rgba(249,115,22,0.15)]"
+                title="Launch Interactive Terminal (Ctrl + K)"
+              >
+                <Icon name="Terminal" size={14} color="#FB923C" />
+                <span>CLI</span>
+              </button>
 
-                <h2>Education</h2>
-                <div className="resume-row">
-                  <h3>B.Tech — Computer Science & Engineering</h3>
-                  <span class="resume-date">2023 – 2027</span>
-                </div>
-                <div className="resume-sub">Graphic Era Hill University (GEHU), Dehradun — CGPA: 7.52</div>
-                <div className="resume-sub" style={{ marginBottom: '12px' }}>
-                  Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming, DBMS, OS, Computer Networks, Software Engineering
-                </div>
-
-                <div className="resume-row">
-                  <h3>Class XII</h3>
-                  <span class="resume-date">2022 – 2023</span>
-                </div>
-                <div className="resume-sub">84%</div>
-
-                <h2>Technical Skills</h2>
-                <div className="resume-sub"><strong>Programming:</strong> Python, C++, JavaScript, SQL</div>
-                <div className="resume-sub"><strong>AI/ML:</strong> Machine Learning, Reinforcement Learning, Model Evaluation, Prompt Engineering, Generative AI, LLM Applications</div>
-                <div className="resume-sub"><strong>Libraries:</strong> NumPy, Pandas, Matplotlib, Scikit-learn</div>
-                <div className="resume-sub"><strong>CS:</strong> DSA, OOP, DBMS, OS, Computer Networks</div>
-                <div className="resume-sub"><strong>Tools:</strong> Git, GitHub, Postman, VS Code</div>
-
-                <h2>Projects</h2>
-                <h3>DonorChain — Real-Time Emergency Donation Network</h3>
-                <div className="resume-tags">React 18 · Vite(PWA) · Node.js · PostgreSQL (PostGIS) · Polygon · Twilio · Firebase Cloud Messaging</div>
-                <ul>
-                  <li>Designed an intelligent donor ranking engine in Python that scores candidates using blood-type compatibility, real-time availability, and geographic proximity via PostGIS spatial indexing; reduced average match latency to under 30 seconds across 100+ test records.</li>
-                  <li>Built a severity-based urgency classification layer that reorders the matching queue in real time based on request criticality; anchored donor consent and identity verification hashes to the Polygon blockchain, ensuring tamper-resistant audit records.</li>
-                  <li>Delivered real-time donor alerts via Twilio SMS and Firebase Cloud Messaging within 3-5 seconds of a match event.</li>
-                </ul>
-
-                <h3>PathForge AI — Intelligent Route Optimization System</h3>
-                <div className="resume-tags">Python · Flask · Reinforcement Learning · Q-Learning · A* · Dijkstra</div>
-                <ul>
-                  <li>Trained a Q-Learning agent in Python to navigate grid environments with obstacles; cut average route exploration steps by ~18% versus random-walk baseline across 500+ simulated scenarios.</li>
-                  <li>Fused Q-Learning policy updates with A* heuristic guidance to enable dynamic path selection in changing environments; the hybrid approach converged to near-optimal routes ~13% faster than baseline.</li>
-                  <li>Wrapped the trained agent in a Flask REST API with real-time path visualization; reward shaping generalizes toward warehouse robotics and autonomous last-mile delivery.</li>
-                </ul>
-
-                <h2>Achievements & Activities</h2>
-                <ul>
-                  <li>Oracle OCI 2025 Certified AI Foundations Associate</li>
-                  <li>AWS ML Fundamentals & Generative AI Solutions — 2025</li>
-                  <li>Built AI-powered applications using Python, Reinforcement Learning, REST APIs, and LLM-based personalization systems</li>
-                  <li>Solved 200+ DSA problems on LeetCode and HackerRank</li>
-                  <li>Led a 4-member team to 100% on-time delivery of OS, DBMS projects</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="resume-modal__footer">
-              <a href="Pawan_Singh_ResumeA.docx" download className="resume-modal__btn resume-modal__btn--primary">
-                Download Resume ↓
+              {/* Resume Button */}
+              <a
+                href={personalInfo.socials.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono font-bold bg-gradient-to-r from-purple-600 to-purple-500 text-white border border-purple-400/40 hover:from-purple-500 hover:to-purple-400 shadow-[0_0_15px_rgba(124,58,237,0.35)] transition-all cursor-pointer"
+              >
+                <Icon name="FileText" size={13} />
+                <span>Resume</span>
               </a>
-              <button className="resume-modal__btn resume-modal__btn--secondary" id="resume-close-2" onClick={closeResume}>
-                Close
+
+              {/* Mobile Menu Toggle */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 rounded-xl text-neutral-300 hover:text-white bg-white/5 border border-white/10 focus:outline-none"
+                aria-label="Toggle Navigation Menu"
+              >
+                <Icon name={mobileMenuOpen ? 'X' : 'Menu'} size={18} />
               </button>
             </div>
+          </nav>
+        </div>
+      </header>
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden bg-black/90 backdrop-blur-2xl flex flex-col pt-24 px-6 pb-8 animate-in fade-in duration-200">
+          <div className="flex flex-col gap-2">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className={`flex items-center justify-between p-3.5 rounded-xl text-sm font-mono text-left transition-all ${
+                    isActive
+                      ? 'bg-purple-600/15 border border-purple-500/40 text-purple-300 font-bold'
+                      : 'text-neutral-300 hover:bg-white/5'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  <span className="text-xs text-neutral-500">{link.num} //</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-auto flex flex-col gap-3 pt-6 border-t border-white/10">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenTerminal) onOpenTerminal();
+              }}
+              className="btn-secondary w-full justify-center text-xs"
+            >
+              <Icon name="Terminal" size={15} />
+              <span>Launch Terminal CLI</span>
+            </button>
+            <a
+              href={personalInfo.socials.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary w-full justify-center text-xs"
+            >
+              <Icon name="FileText" size={15} />
+              <span>Download Resume</span>
+            </a>
           </div>
         </div>
       )}
     </>
   );
-}
+};

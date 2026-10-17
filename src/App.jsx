@@ -1,110 +1,90 @@
-import React, { useEffect, useRef } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import ProjectDetail from './pages/ProjectDetail';
+import React, { useState, useEffect } from "react";
+import { Preloader } from "./components/Preloader";
+import { Navbar } from "./components/Navbar";
+import { Hero } from "./components/Hero";
+import { About } from "./components/About";
+import { Skills } from "./components/Skills";
+import { Projects } from "./components/Projects";
+import { CodingProfiles } from "./components/CodingProfiles";
+import { Education } from "./components/Education";
+import { Achievements } from "./components/Achievements";
+import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
+import { TerminalWidget } from "./components/TerminalWidget";
 
-// ScrollToTop handler to reset viewport position on routing transitions
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-}
-
-// Global Cursor Wrapper
-function CustomCursor() {
-  const cursorRef = useRef(null);
-  const dotRef = useRef(null);
+export function App() {
+  const [loading, setLoading] = useState(true);
+  const [terminalOpen, setTerminalOpen] = useState(false);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const dot = dotRef.current;
-    if (!cursor || !dot) return;
-
-    let currentX = 0, currentY = 0;
-    let targetX = 0, targetY = 0;
-    const speed = 0.12; 
-    let animationFrameId = null;
-
-    const handleMouseMove = (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
-    };
-
-    const handleMouseLeaveDoc = () => {
-      cursor.classList.add('hidden');
-      dot.classList.add('hidden');
-    };
-
-    const handleMouseEnterDoc = () => {
-      cursor.classList.remove('hidden');
-      dot.classList.remove('hidden');
-    };
-
-    // Physics interpolation (lerp) loop
-    const updateCursor = () => {
-      currentX += (targetX - currentX) * speed;
-      currentY += (targetY - currentY) * speed;
-      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
-      animationFrameId = requestAnimationFrame(updateCursor);
-    };
-
-    // Dynamic delegate event listener for hover styling
-    const handleMouseOver = (e) => {
-      const interactive = e.target.closest('a, button, .project-card, .navbar__menu-btn, .navbar__dots, .footer-link-button, .nav-dropdown__link');
-      if (interactive) {
-        cursor.classList.add('hovered');
-      } else {
-        cursor.classList.remove('hovered');
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeaveDoc);
-    document.addEventListener('mouseenter', handleMouseEnterDoc);
-    document.addEventListener('mouseover', handleMouseOver);
-    
-    updateCursor();
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeaveDoc);
-      document.removeEventListener('mouseenter', handleMouseEnterDoc);
-      document.removeEventListener('mouseover', handleMouseOver);
-      cancelAnimationFrame(animationFrameId);
-    };
+    const handleOpenTerminal = () => setTerminalOpen(true);
+    window.addEventListener("open-terminal", handleOpenTerminal);
+    return () => window.removeEventListener("open-terminal", handleOpenTerminal);
   }, []);
 
   return (
-    <>
-      <div ref={cursorRef} className="custom-cursor" id="custom-cursor"></div>
-      <div ref={dotRef} className="custom-cursor-dot" id="custom-cursor-dot"></div>
-    </>
+    <div className="relative min-h-screen bg-[#0A0A0A] text-white selection:bg-purple-600 selection:text-white font-sans">
+
+      {/* Aurora beam background layers */}
+      <div className="aurora-beam aurora-beam-1" />
+      <div className="aurora-beam aurora-beam-2" />
+      <div className="aurora-beam aurora-beam-3" />
+
+      {/* 1. Global Tactical Noise Texture Overlay */}
+      <div className="noise-overlay" />
+
+      {/* 2. Global Cartesian Blueprint Grid */}
+      <div className="grid-pattern fixed inset-0 pointer-events-none opacity-25 z-0" />
+
+      {/* 3. System Dispatch Preloader */}
+      {loading && <Preloader onFinish={() => setLoading(false)} />}
+
+      {/* 4. Main Application Viewport */}
+      <div className={"transition-opacity duration-700 " + (loading ? "opacity-0" : "opacity-100")}>
+
+        {/* Floating Glassmorphic Navbar */}
+        <Navbar onOpenTerminal={() => setTerminalOpen(true)} />
+
+        {/* Main Content Sections */}
+        <main>
+          {/* 01. Hero Command Matrix */}
+          <Hero />
+
+          {/* 02. Biography & Core Architecture */}
+          <About />
+
+          {/* 03. Technical Arsenal Skills Matrix */}
+          <Skills />
+
+          {/* 04. Projects & Deep Dive Case Studies */}
+          <Projects />
+
+          {/* 05. Telemetry & Coding Profiles */}
+          <CodingProfiles />
+
+          {/* 06. Academic Background & Coursework */}
+          <Education />
+
+          {/* 07. Achievements & Milestones */}
+          <Achievements />
+
+          {/* 08. Contact Dispatch */}
+          <Contact />
+        </main>
+
+        {/* Global System Footer */}
+        <Footer />
+
+      </div>
+
+      {/* 5. Interactive Floating Terminal CLI Widget */}
+      <TerminalWidget
+        isOpen={terminalOpen}
+        onClose={() => setTerminalOpen(false)}
+      />
+
+    </div>
   );
 }
 
-export default function App() {
-  return (
-    <Router>
-      <ScrollToTop />
-      <CustomCursor />
-      
-      {/* Global Navbar */}
-      <Navbar />
-
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects/:projectId" element={<ProjectDetail />} />
-        </Routes>
-      </main>
-
-      {/* Global Footer */}
-      <Footer />
-    </Router>
-  );
-}
+export default App;
