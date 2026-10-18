@@ -22,6 +22,7 @@ export const personalInfo = {
   socials: {
     github: "https://github.com/Pawan-git05",
     linkedin: "https://www.linkedin.com/in/pawan-singh-a46876280/",
+    leetcode: "https://leetcode.com/u/PawanSIngh12T/",
     email: "mailto:Singhbisht310@gmail.com",
     resume: "/Pawan_Resume.pdf"
   }
@@ -29,7 +30,7 @@ export const personalInfo = {
 
 // 6 High-Impact Telemetry Stats
 export const telemetryStats = [
-  { label: "DSA Solved", value: 200, suffix: "+", icon: "Brain", color: "#A855F7" },
+  { label: "DSA Solved", value: 200, suffix: "+", icon: "Brain", color: "#FFA116", link: "https://leetcode.com/u/PawanSIngh12T/" },
   { label: "Class XII", value: 84, suffix: "%", icon: "Trophy", color: "#FB923C" },
   { label: "GEHU CGPA", value: 7.6, suffix: "", icon: "Star", color: "#A855F7" },
   { label: "Certifications", value: 4, suffix: "+", icon: "Rocket", color: "#FB923C" },
@@ -331,8 +332,8 @@ export const projectsData = [
 export const codingProfiles = [
   {
     platform: "LeetCode",
-    username: "pawan_singh",
-    url: "https://leetcode.com",
+    username: "PawanSIngh12T",
+    url: "https://leetcode.com/u/PawanSIngh12T/",
     stats: { solved: "200+", focus: "DSA & Problem Solving", rating: "Active" },
     color: "#FFA116",
     bgColor: "rgba(255, 161, 22, 0.08)",

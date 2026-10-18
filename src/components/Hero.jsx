@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { personalInfo } from '../data/portfolioData';
 import { Icon } from './Icons';
@@ -342,6 +342,7 @@ export const Hero = () => {
                 {[
                   { name: 'Github', url: personalInfo.socials.github, color: '#A855F7' },
                   { name: 'Linkedin', url: personalInfo.socials.linkedin, color: '#FB923C' },
+                  { name: 'LeetCode', url: personalInfo.socials.leetcode, color: '#FFA116' },
                   { name: 'Mail', url: personalInfo.socials.email, color: '#A855F7' }
                 ].map((s) => (
                   <a

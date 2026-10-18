@@ -106,7 +106,19 @@ PITCH: ${personalInfo.bio}`,
           text: `DIRECT CHANNELS:
   Email:    ${personalInfo.email}
   GitHub:   ${personalInfo.socials.github}
-  LinkedIn: ${personalInfo.socials.linkedin}`,
+  LinkedIn: ${personalInfo.socials.linkedin}
+  LeetCode: ${personalInfo.socials.leetcode}`,
+          type: 'output'
+        });
+        break;
+
+      case 'leetcode':
+      case 'dsa':
+        newHistory.push({
+          text: `LEETCODE TELEMETRY:
+  Handle:   @PawanSIngh12T
+  Profile:  ${personalInfo.socials.leetcode}
+  Solved:   200+ Algorithmic Challenges (Arrays, Trees, Graphs, DP)`,
           type: 'output'
         });
         break;

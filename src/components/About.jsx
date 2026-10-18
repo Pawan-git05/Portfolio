@@ -24,30 +24,50 @@ export const About = () => {
 
         {/* 6-Card Telemetry Metric Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
-          {telemetryStats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="glass-card p-5 flex flex-col items-center justify-center text-center group hover:border-purple-500/40 transition-all duration-300"
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
-                style={{
-                  background: `${stat.color}15`,
-                  borderColor: `${stat.color}30`,
-                  borderWidth: '1px'
-                }}
+          {telemetryStats.map((stat, idx) => {
+            const cardBody = (
+              <>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                  style={{
+                    background: `${stat.color}15`,
+                    borderColor: `${stat.color}30`,
+                    borderWidth: '1px'
+                  }}
+                >
+                  <Icon name={stat.icon} size={18} color={stat.color} />
+                </div>
+                <div className="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight">
+                  {stat.value}
+                  <span style={{ color: stat.color }}>{stat.suffix}</span>
+                </div>
+                <div className="text-[11px] font-mono text-neutral-400 mt-1 uppercase tracking-wider flex items-center gap-1">
+                  <span>{stat.label}</span>
+                  {stat.link && <Icon name="ExternalLink" size={10} className="opacity-60 group-hover:opacity-100" />}
+                </div>
+              </>
+            );
+
+            return stat.link ? (
+              <a
+                key={idx}
+                href={stat.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Open ${stat.label} Profile`}
+                className="glass-card p-5 flex flex-col items-center justify-center text-center group hover:border-[#FFA116]/60 hover:shadow-[0_0_20px_rgba(255,161,22,0.18)] transition-all duration-300 cursor-pointer"
               >
-                <Icon name={stat.icon} size={18} color={stat.color} />
+                {cardBody}
+              </a>
+            ) : (
+              <div
+                key={idx}
+                className="glass-card p-5 flex flex-col items-center justify-center text-center group hover:border-purple-500/40 transition-all duration-300"
+              >
+                {cardBody}
               </div>
-              <div className="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight">
-                {stat.value}
-                <span style={{ color: stat.color }}>{stat.suffix}</span>
-              </div>
-              <div className="text-[11px] font-mono text-neutral-400 mt-1 uppercase tracking-wider">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* 4 Core Architecture Domain Cards */}

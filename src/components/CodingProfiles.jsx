@@ -44,9 +44,11 @@ export const CodingProfiles = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2.5">
                     <span
-                      className="w-3 h-3 rounded-full shadow-sm"
-                      style={{ background: profile.color }}
-                    />
+                      className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 bg-white/[0.04] shadow-sm"
+                      style={{ color: profile.color }}
+                    >
+                      <Icon name={profile.platform} size={15} color={profile.color} />
+                    </span>
                     <h3 className="font-heading font-bold text-lg text-white">
                       {profile.platform}
                     </h3>

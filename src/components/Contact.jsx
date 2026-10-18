@@ -113,12 +113,12 @@ export const Contact = () => {
             </div>
 
             {/* Social Grid */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
               <a
                 href={personalInfo.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card p-3 flex items-center gap-2.5 hover:border-purple-500/40 text-xs font-mono text-neutral-300 hover:text-white transition-all"
+                className="glass-card p-3 flex items-center justify-center sm:justify-start gap-2.5 hover:border-purple-500/40 text-xs font-mono text-neutral-300 hover:text-white transition-all"
               >
                 <Icon name="Github" size={16} />
                 <span>GitHub</span>
@@ -128,10 +128,20 @@ export const Contact = () => {
                 href={personalInfo.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card p-3 flex items-center gap-2.5 hover:border-orange-500/40 text-xs font-mono text-neutral-300 hover:text-white transition-all"
+                className="glass-card p-3 flex items-center justify-center sm:justify-start gap-2.5 hover:border-orange-500/40 text-xs font-mono text-neutral-300 hover:text-white transition-all"
               >
                 <Icon name="Linkedin" size={16} />
                 <span>LinkedIn</span>
+              </a>
+
+              <a
+                href={personalInfo.socials.leetcode}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card p-3 flex items-center justify-center sm:justify-start gap-2.5 hover:border-[#FFA116]/40 text-xs font-mono text-neutral-300 hover:text-white transition-all"
+              >
+                <Icon name="LeetCode" size={16} color="#FFA116" />
+                <span>LeetCode</span>
               </a>
             </div>
 
